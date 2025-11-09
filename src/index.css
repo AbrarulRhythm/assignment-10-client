@@ -93,3 +93,15 @@ p {
 .rfm-initial-child-container img {
   @apply saturate-[0] hover:saturate-100 duration-300
 }
+
+/* [ Blog ] */
+/*================================================== */
+.blog-meta li {
+  @apply inline-block
+}
+
+/* [ OurPartners ] */
+/*================================================== */
+.blog-meta li:not(:last-child):after {
+  @apply content-[''] ml-4 mr-4 inline-block w-1 h-1 rounded-full bg-body align-middle;
+}
