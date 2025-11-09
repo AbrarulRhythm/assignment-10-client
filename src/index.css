@@ -70,3 +70,12 @@ p {
 .header-nav ul a.active {
   @apply text-ps-primary relative before:content-[''] before:w-[90%] before:h-0.5 before:absolute before:-translate-x-[50%] before:left-[50%] before:mt-6 before:bg-linear-to-r before:from-ps-primary/0 before:via-ps-primary before:to-ps-primary/0;
 }
+
+/* [ Hero Section ] */
+/*================================================== */
+.hero {
+  background: linear-gradient(90deg, rgba(7, 28, 31, 0.78) 0%, rgba(7, 28, 31, 0.04) 100%), url(./assets/hero-bg-01.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

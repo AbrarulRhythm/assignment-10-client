@@ -8,7 +8,7 @@ import { FaBars } from 'react-icons/fa';
 const Header = () => {
     return (
         <div className='container'>
-            <nav className='priamry-menu'>
+            <nav className='priamry-menu py-2.5'>
                 <div className='flex flex-wrap -mx-3 items-center'>
                     <div className='w-6/12 lg:w-3/12 px-3'>
                         {/* Header Logo */}
