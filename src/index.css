@@ -80,3 +80,16 @@ p {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+/* [ OurPartners ] */
+/*================================================== */
+.rfm-marquee-container,
+.rfm-marquee,
+.rfm-initial-child-container {
+  @apply gap-14
+}
+
+.rfm-marquee img,
+.rfm-initial-child-container img {
+  @apply saturate-[0] hover:saturate-100 duration-300
+}

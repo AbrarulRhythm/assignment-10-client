@@ -5,6 +5,7 @@ import SectionTitle from '../../components/SectionTitle/SectionTitle';
 import FoodCard from '../../components/FoodCard/FoodCard';
 import { Link } from 'react-router';
 import CommunityImpact from '../../components/CommunityImpact/CommunityImpact';
+import OurPartners from '../../components/OurPartners/OurPartners';
 
 const Home = () => {
     return (
@@ -35,6 +36,9 @@ const Home = () => {
 
             {/* Community Impact */}
             <CommunityImpact></CommunityImpact>
+
+            {/* Our Partners */}
+            <OurPartners></OurPartners>
         </>
     );
 };
