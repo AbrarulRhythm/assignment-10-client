@@ -50,7 +50,7 @@ p {
 
 /* ====================== Buttons ====================== */
 .button {
-  @apply w-max inline-block text-base font-medium py-3 px-8 lg:py-4 lg:px-10 rounded-md cursor-pointer text-white bg-ps-primary outline-none transition-all duration-300 hover:shadow-btn-inner;
+  @apply w-max inline-block text-base font-medium py-3 px-8 lg:py-4 lg:px-10 rounded-md cursor-pointer text-white bg-ps-primary outline-none transition-all duration-300 focus:outline-0 hover:shadow-btn-inner;
 }
 
 .button-sm {
@@ -59,3 +59,14 @@ p {
 
 /* [ Header ] */
 /*================================================== */
+.header-nav ul {
+  @apply flex items-center justify-center
+}
+
+.header-nav ul a {
+  @apply flex items-center px-3.5 font-medium text-heading h-[90px] hover:text-ps-primary duration-300;
+}
+
+.header-nav ul a.active {
+  @apply text-ps-primary relative before:content-[''] before:w-[90%] before:h-0.5 before:absolute before:-translate-x-[50%] before:left-[50%] before:mt-6 before:bg-linear-to-r before:from-ps-primary/0 before:via-ps-primary before:to-ps-primary/0;
+}
