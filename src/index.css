@@ -6,5 +6,56 @@
 }
 
 @theme {
+  /* Google Font */
   --font-Poppins: "Poppins", "sans-serif";
+
+  /* Breakpoints */
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-xxl: 1400px;
+
+  /* Color */
+  --color-ps-primary: #80B500;
+  --color-heading: #071C1F;
+  --color-body: #6C757D;
+  --color-dark-04: #DFE0E4;
+  --color-card: #F7F5EB;
+
+  /* Shadow */
+  --shadow-btn-inner: inset 0px 0px 122px rgba(0, 0, 0, 0.22);
 }
+
+html,
+body {
+  @apply scroll-smooth
+}
+
+body {
+  @apply font-Poppins text-base font-normal relative w-full text-body bg-white overflow-x-hidden
+}
+
+p {
+  @apply leading-[1.8];
+}
+
+::selection {
+  @apply text-white bg-ps-primary;
+}
+
+.container {
+  @apply mx-auto sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px] xxl:max-w-[1320px] px-3;
+}
+
+/* ====================== Buttons ====================== */
+.button {
+  @apply w-max inline-block text-base font-medium py-3 px-8 lg:py-4 lg:px-10 rounded-md cursor-pointer text-white bg-ps-primary outline-none transition-all duration-300 hover:shadow-btn-inner;
+}
+
+.button-sm {
+  @apply py-3 px-8 lg:py-3.5 lg:px-9
+}
+
+/* [ Header ] */
+/*================================================== */
