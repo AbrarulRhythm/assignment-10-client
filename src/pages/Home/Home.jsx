@@ -4,12 +4,15 @@ import PrimaryCard from '../../components/PrimaryCard/PrimaryCard';
 import SectionTitle from '../../components/SectionTitle/SectionTitle';
 import FoodCard from '../../components/FoodCard/FoodCard';
 import { Link } from 'react-router';
+import CommunityImpact from '../../components/CommunityImpact/CommunityImpact';
 
 const Home = () => {
     return (
         <>
             <HeroSlider></HeroSlider>
             <PrimaryCard></PrimaryCard>
+
+            {/* Featured Foods */}
             <section className='py-14 lg:py-20 bg-card'>
                 <div className='container'>
                     <SectionTitle
@@ -29,6 +32,9 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+
+            {/* Community Impact */}
+            <CommunityImpact></CommunityImpact>
         </>
     );
 };
