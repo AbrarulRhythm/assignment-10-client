@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import app from '../firebase/firebase.config';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
 
 const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
@@ -16,7 +16,14 @@ const AuthProvider = ({ children }) => {
 
     // Update User Profile
     const updateUserProfile = (updatedData) => {
+        setLoading(true);
         return updateProfile(auth.currentUser, updatedData);
+    }
+
+    // User Sign Out
+    const signOutUser = () => {
+        setLoading(true);
+        return signOut(auth);
     }
 
     useEffect(() => {
@@ -35,6 +42,7 @@ const AuthProvider = ({ children }) => {
         setUser,
         createUser,
         updateUserProfile,
+        signOutUser,
         loading,
         setLoading,
     }

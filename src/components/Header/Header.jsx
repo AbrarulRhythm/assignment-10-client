@@ -9,9 +9,10 @@ import { PiSignOutBold } from 'react-icons/pi';
 
 // Image
 import logoDark from '../../assets/logo-dark.png';
+import { toast } from 'react-toastify';
 
 const Header = () => {
-    const { user } = useAuth();
+    const { user, signOutUser } = useAuth();
     const [openMenu, setOpenMenu] = useState(false);
     const menuRef = useRef(null);
 
@@ -28,6 +29,17 @@ const Header = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         }
     }, []);
+
+    // Handle Sign Out User
+    const handleSignOut = () => {
+        signOutUser()
+            .then(() => {
+                toast.success('Successfully signed out! We hope to see you again soon.');
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            })
+    }
 
     return (
         <div className='container'>
@@ -103,7 +115,7 @@ const Header = () => {
                                                 </ul>
                                                 <div className='border-t-0 border border-dark-04 my-4'></div>
                                                 <div className='px-4 pb-3'>
-                                                    <button className='w-full px-3 py-3 rounded-md border border-dark-04 bg-gray-100 hover:bg-gray-200 duration-300 cursor-pointer flex items-center justify-center gap-1 font-medium'><PiSignOutBold className='text-lg' /> Sing Out</button>
+                                                    <button onClick={handleSignOut} className='w-full px-3 py-3 rounded-md border border-dark-04 bg-gray-100 hover:bg-gray-200 duration-300 cursor-pointer flex items-center justify-center gap-1 font-medium'><PiSignOutBold className='text-lg' /> Sing Out</button>
                                                 </div>
                                             </div>
                                         </div>
