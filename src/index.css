@@ -119,3 +119,13 @@ p {
 .footer-menu li a:hover {
   @apply text-ps-primary duration-300
 }
+
+/* [ Login & Register ] */
+/*================================================== */
+.l-r-b {
+  width: 100%;
+}
+
+.or-social {
+  @apply before:content-[''] before:w-[50%] before:absolute before:h-px before:bg-dark-04 before:-left-6 before:top-[50%] after:content-[''] after:w-[50%] after:absolute after:h-px after:bg-dark-04 after:-right-6 after:top-[50%];
+}
