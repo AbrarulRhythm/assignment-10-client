@@ -4,11 +4,48 @@ import { FcGoogle } from 'react-icons/fc';
 import { IoEyeOff } from 'react-icons/io5';
 import { Link } from 'react-router';
 import useAuth from '../../hooks/useAuth';
+import { useForm } from "react-hook-form"
+import { toast } from 'react-toastify';
+import useAxios from '../../hooks/useAxios';
 
 const Register = () => {
-    const authInfo = useAuth();
+    const { createUser } = useAuth();
+    const axiosInstance = useAxios();
     const [showPassword, setShowPassword] = useState(false);
-    const [passwordError, setPasswordError] = useState('');
+
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors, isSubmitting },
+    } = useForm();
+
+    // Handle Create User
+    const handleCreateUser = async (userData) => {
+        createUser(userData.email, userData.password)
+            .then((result) => {
+                reset(); // reset form
+                const user = result.user;
+                const newUser = {
+                    name: user.displayName,
+                    email: user.email,
+                    image: user.photoURL,
+                    pass: btoa(userData.password)
+                }
+
+                // Create user in the database
+                axiosInstance.post('/users', newUser)
+                    .then((data) => {
+                        if (data.data.insertedId) {
+                            toast.success('Your account has been created successfully 🎉');
+                        }
+                    })
+
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            })
+    }
 
     return (
         <section className='py-12'>
@@ -20,31 +57,70 @@ const Register = () => {
                                 <h1 className='text-[34px] font-semibold text-heading mb-2'>Register Now!</h1>
                                 <p>Already have an account? <Link to='/sign-in' className='text-ps-primary hover:underline'>Login Now</Link></p>
                             </div>
-                            <form>
+                            <form onSubmit={handleSubmit(handleCreateUser)}>
+                                {/* Name */}
                                 <div className='mb-4'>
                                     <label htmlFor="name" className='text-sm mb-2 inline-block'>Name</label>
-                                    <input type="text" name='name' className='w-full px-6 py-3.5 border border-dark-04 rounded-md focus:outline-0 focus:border-ps-primary' placeholder='Oliver Noha' required />
+                                    <input type="text"
+                                        {...register('name',
+                                            {
+                                                required: 'Name is required',
+                                                minLength: { value: 3, message: 'Name must be at least 3 characters long.' },
+                                                maxLength: { value: 30, message: 'Name cannot be longer than 30 characters.' }
+                                            }
+                                        )}
+                                        className={`${errors.name ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='Oliver Noha' />
+                                    <span className={`${errors.name ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.name && errors.name.message}</span>
                                 </div>
+                                {/* Email */}
                                 <div className='mb-4'>
                                     <label htmlFor="email" className='text-sm mb-2 inline-block'>Eamil</label>
-                                    <input type="eamil" name='email' className='w-full px-6 py-3.5 border border-dark-04 rounded-md focus:outline-0 focus:border-ps-primary' placeholder='olivernoha@gmail.com' required />
+                                    <input type="eamil"
+                                        {...register('email',
+                                            {
+                                                required: 'Email is required',
+                                                pattern: {
+                                                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                                    message: "Please enter a valid email address (must include @ and .com)",
+                                                }
+                                            })}
+                                        className={`${errors.email ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border rounded-md focus:outline-0`} placeholder='olivernoha@gmail.com' />
+                                    <span className={`${errors.email ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.email && errors.email.message}</span>
                                 </div>
+                                {/* Image */}
                                 <div className='mb-4'>
                                     <label htmlFor="image" className='text-sm mb-2 inline-block'>Image-URL</label>
-                                    <input type="text" name='image' className='w-full px-6 py-3.5 border border-dark-04 rounded-md focus:outline-0 focus:border-ps-primary' placeholder='https://your-image-url.com' required />
+                                    <input type="text" {...register('image', { required: 'Image is required' })} className={`${errors.image ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border rounded-md focus:outline-0`} placeholder='https://your-image-url.com' />
+                                    <span className={`${errors.image ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.image && errors.image.message}</span>
                                 </div>
+                                {/* Password */}
                                 <div className='mb-4'>
                                     <label htmlFor="password" className='text-sm mb-2 inline-block'>Password</label>
                                     <div className='relative'>
-                                        <input type={showPassword ? 'text' : 'password'} name='password' className={`${passwordError ? 'border-red-500 text-red-500 focus:border-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='*************' required />
+                                        <input type={showPassword ? 'text' : 'password'}
+                                            {...register('password',
+                                                {
+                                                    required: 'Password is required',
+                                                    validate: {
+                                                        minLength: (value) =>
+                                                            value.length >= 6 || "Must be at least 6 characters",
+                                                        hasUppercase: (value) =>
+                                                            /[A-Z]/.test(value) || "Must contain at least one uppercase letter",
+                                                        hasLowercase: (value) =>
+                                                            /[a-z]/.test(value) || "Must contain at least one lowercase letter",
+                                                        hasSpecialChar: (value) =>
+                                                            /[^A-Za-z0-9]/.test(value) || "Must contain at least one special character",
+                                                    }
+                                                })}
+                                            className={`${errors.password ? 'border-red-500 text-red-500 focus:border-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='*************' />
                                         <span onClick={() => setShowPassword(!showPassword)} className='absolute right-5 top-[50%] -translate-y-[50%] text-xl cursor-pointer text-dark-2 hover:text-dark-1 duration-150'>
                                             {showPassword ? <FaEye /> : <IoEyeOff />}
                                         </span>
                                     </div>
-                                    <span className={`${passwordError ? 'block' : 'hidden'} text-[12px] mt-1 text-red-500`}>{passwordError}</span>
+                                    <span className={`${errors.password ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.password && errors.password.message}</span>
                                 </div>
                                 <div className='w-full'>
-                                    <button className='w-full button mt-4 l-r-b'>Register</button>
+                                    <button className='w-full button mt-4 l-r-b' disabled={isSubmitting}>{isSubmitting ? <span className='loading loading-spinner loading-sm'></span> : 'Register'}</button>
                                 </div>
                             </form>
                             <div className='my-6 overflow-hidden'>

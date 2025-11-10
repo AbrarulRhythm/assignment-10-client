@@ -15,7 +15,7 @@ const SignIn = () => {
                         <div className='w-full md:w-9/12 lg:w-6/12 px-3'>
                             <div className='p-8 md:p-10 border border-dark-04 rounded-md'>
                                 <div className='text-center mb-6'>
-                                    <h1 className='text-[34px] font-semibold text-heading mb-2'>Register Now!</h1>
+                                    <h1 className='text-[34px] font-semibold text-heading mb-2'>Sign In Now!</h1>
                                     <p>Don't have an account? <Link to='/register' className='text-ps-primary hover:underline'>Register Now</Link></p>
                                 </div>
                                 <form>

@@ -58,6 +58,10 @@ p {
   @apply py-3 px-8 lg:py-3.5 lg:px-9
 }
 
+.button:disabled {
+  @apply shadow-btn-inner text-white/80 cursor-wait;
+}
+
 /* [ Header ] */
 /*================================================== */
 .header-nav ul {
