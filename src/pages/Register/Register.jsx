@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import { FaEye } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { IoEyeOff } from 'react-icons/io5';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 import { useForm } from "react-hook-form"
 import { toast } from 'react-toastify';
 import useAxios from '../../hooks/useAxios';
 
 const Register = () => {
-    const { createUser } = useAuth();
+    const { setUser, createUser, updateUserProfile } = useAuth();
     const axiosInstance = useAxios();
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
 
     const {
         register,
@@ -26,21 +27,32 @@ const Register = () => {
             .then((result) => {
                 reset(); // reset form
                 const user = result.user;
-                const newUser = {
-                    name: user.displayName,
-                    email: user.email,
-                    image: user.photoURL,
-                    pass: btoa(userData.password)
-                }
 
-                // Create user in the database
-                axiosInstance.post('/users', newUser)
-                    .then((data) => {
-                        if (data.data.insertedId) {
-                            toast.success('Your account has been created successfully 🎉');
+                // Update User
+                updateUserProfile({ displayName: userData.name, photoURL: userData.image })
+                    .then(() => {
+                        setUser({ ...user, displayName: userData.name, photoURL: userData.image });
+
+                        const newUser = {
+                            name: userData.name,
+                            email: user.email,
+                            image: userData.image,
+                            pass: btoa(userData.password)
                         }
-                    })
 
+                        // Create user in the database
+                        axiosInstance.post('/users', newUser)
+                            .then((data) => {
+                                if (data.data.insertedId) {
+                                    navigate('/');
+                                    toast.success('Your account has been created successfully 🎉');
+                                }
+                            })
+                    })
+                    .catch((error) => {
+                        toast.error(error.message);
+                        setUser(user);
+                    })
             })
             .catch((error) => {
                 toast.error(error.message);

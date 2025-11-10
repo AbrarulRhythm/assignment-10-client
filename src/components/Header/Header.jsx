@@ -77,12 +77,12 @@ const Header = () => {
                                                     setOpenMenu(!openMenu)
                                                 }}
                                             >
-                                                <img src="https://images.pexels.com/photos/1036622/pexels-photo-1036622.jpeg" className='w-14 h-14 object-cover rounded-full cursor-pointer' alt='User Profile Image' />
+                                                <img src={`${user && user.photoURL}`} className='w-14 h-14 object-cover rounded-full cursor-pointer' alt='User Profile Image' />
                                             </div>
                                             <div className={`${openMenu ? 'opacity-100 visible' : 'opacity-0 invisible'} absolute right-0 top-[76px] w-[294px] h-auto text-sm before:content-[''] before:w-6 before:h-6  before:absolute before:-top-3 before:right-3.5 before:bg-white before:rotate-45 before:rounded-tl-sm before:border-t before:border-l before:border-dark-04 rounded-md bg-white border border-dark-04`}>
                                                 <div className='pt-8 mb-6'>
-                                                    <img src="https://images.pexels.com/photos/1036622/pexels-photo-1036622.jpeg" className='w-11 h-11 object-cover rounded-full mx-auto mb-2' alt='User Profile Pic' />
-                                                    <h5 className='text-heading text-sm font-medium text-center'>Abrarul Rhythm</h5>
+                                                    <img src={`${user && user.photoURL}`} className='w-11 h-11 object-cover rounded-full mx-auto mb-2' alt='User Profile Pic' />
+                                                    <h5 className='text-heading text-sm font-medium text-center'>{user && user.displayName}</h5>
                                                 </div>
                                                 <ul>
                                                     <li>
