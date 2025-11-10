@@ -105,3 +105,17 @@ p {
 .blog-meta li:not(:last-child):after {
   @apply content-[''] ml-4 mr-4 inline-block w-1 h-1 rounded-full bg-body align-middle;
 }
+
+/* [ Footer ] */
+/*================================================== */
+.footer-menu li {
+  @apply relative mb-0
+}
+
+.footer-menu li:not(:last-child)::before {
+  @apply content-['|'] absolute top-0 -right-3.5
+}
+
+.footer-menu li a:hover {
+  @apply text-ps-primary duration-300
+}
