@@ -4,6 +4,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import Register from "../pages/Register/Register";
 import SignIn from "../pages/SignIn/SignIn";
+import AddFood from "../pages/AddFood/AddFood";
 
 export const router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
             {
                 path: 'sign-in',
                 Component: SignIn
+            },
+            {
+                path: 'add-food',
+                element: <AddFood></AddFood>
             }
         ]
     }

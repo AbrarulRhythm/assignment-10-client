@@ -98,7 +98,7 @@ const Header = () => {
                                                 </div>
                                                 <ul>
                                                     <li>
-                                                        <Link to='/' className='flex items-center px-4 py-2 gap-2 font-medium hover:bg-gray-100'>
+                                                        <Link to='/add-food' className='flex items-center px-4 py-2 gap-2 font-medium hover:bg-gray-100'>
                                                             <MdAdd className='text-lg' /> Add Food
                                                         </Link>
                                                     </li>
