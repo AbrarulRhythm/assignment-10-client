@@ -122,7 +122,7 @@ const Header = () => {
                                     </>
                                 ) : (
                                     <div className='sign-in-button'>
-                                        <Link to='/' className='button button-sm'>Sign In</Link>
+                                        <Link to='/sign-in' className='button button-sm'>Sign In</Link>
                                     </div>
                                 )
                             }
