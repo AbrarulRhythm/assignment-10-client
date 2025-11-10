@@ -3,8 +3,10 @@ import { FaEye } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { IoEyeOff } from 'react-icons/io5';
 import { Link } from 'react-router';
+import useAuth from '../../hooks/useAuth';
 
 const Register = () => {
+    const authInfo = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const [passwordError, setPasswordError] = useState('');
 
