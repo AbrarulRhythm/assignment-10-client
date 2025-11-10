@@ -8,7 +8,7 @@ import useAuth from '../../hooks/useAuth';
 import { toast } from 'react-toastify';
 
 const SignIn = () => {
-    const { singInUser } = useAuth();
+    const { singInUser, signInWithGoogle } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
@@ -25,6 +25,19 @@ const SignIn = () => {
         singInUser(userData.email, userData.password)
             .then((result) => {
                 reset(); // reset form
+                const user = result.user;
+                toast.success(`Sign In successful. Welcome back, ${user.displayName}!`);
+                navigate(`${location.state ? location.state : '/'}`);
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            })
+    }
+
+    // Handle Sign In with Google
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then((result) => {
                 const user = result.user;
                 toast.success(`Sign In successful. Welcome back, ${user.displayName}!`);
                 navigate(`${location.state ? location.state : '/'}`);
@@ -85,7 +98,7 @@ const SignIn = () => {
                                     <div className='relative font-medium text-center or-social'>OR</div>
                                 </div>
                                 {/* Google Sign In Button */}
-                                <button className='font-semibold flex items-center justify-center w-full gap-2.5 border border-dark-04 hover:border-ps-primary duration-200 cursor-pointer rounded-sm py-3'>
+                                <button onClick={handleGoogleSignIn} className='font-semibold flex items-center justify-center w-full gap-2.5 border border-dark-04 hover:border-ps-primary duration-200 cursor-pointer rounded-sm py-3'>
                                     <FcGoogle className='text-[26px]' /> Sign In With Google
                                 </button>
                             </div>

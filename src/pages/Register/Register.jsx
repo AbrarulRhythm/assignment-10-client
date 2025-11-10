@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import useAxios from '../../hooks/useAxios';
 
 const Register = () => {
-    const { setUser, createUser, updateUserProfile } = useAuth();
+    const { setUser, createUser, updateUserProfile, signInWithGoogle } = useAuth();
     const axiosInstance = useAxios();
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
@@ -52,6 +52,35 @@ const Register = () => {
                     .catch((error) => {
                         toast.error(error.message);
                         setUser(user);
+                    })
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            })
+    }
+
+    // Handle Sign In with Google
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then((result) => {
+                const user = result.user;
+                const newUser = {
+                    name: user.displayName,
+                    email: user.email,
+                    image: user.photoURL
+                }
+
+                // Create user in the database
+                axiosInstance.post('/users', newUser)
+                    .then((data) => {
+                        if (data.data.insertedId) {
+                            toast.success(`Welcome aboard, ${user.displayName}! 🎉 You've successfully signed up.`);
+                            navigate('/');
+                        }
+                        else {
+                            toast(data.data.message);
+                            navigate('/');
+                        }
                     })
             })
             .catch((error) => {
@@ -139,7 +168,7 @@ const Register = () => {
                                 <div className='relative font-medium text-center or-social'>OR</div>
                             </div>
                             {/* Google Sign In Button */}
-                            <button className='font-semibold flex items-center justify-center w-full gap-2.5 border border-dark-04 hover:border-ps-primary duration-200 cursor-pointer rounded-sm py-3'>
+                            <button onClick={handleGoogleSignIn} className='font-semibold flex items-center justify-center w-full gap-2.5 border border-dark-04 hover:border-ps-primary duration-200 cursor-pointer rounded-sm py-3'>
                                 <FcGoogle className='text-[26px]' /> Sign Up With Google
                             </button>
                         </div>
