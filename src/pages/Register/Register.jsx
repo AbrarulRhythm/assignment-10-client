@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [passwordError, setPasswordError] = useState('');
 
     return (
         <section className='py-12'>
@@ -15,7 +16,7 @@ const Register = () => {
                         <div className='p-8 md:p-10 border border-dark-04 rounded-md'>
                             <div className='text-center mb-6'>
                                 <h1 className='text-[34px] font-semibold text-heading mb-2'>Register Now!</h1>
-                                <p>Already have an account? <Link to='/' className='text-ps-primary hover:underline'>Login Now</Link></p>
+                                <p>Already have an account? <Link to='/sign-in' className='text-ps-primary hover:underline'>Login Now</Link></p>
                             </div>
                             <form>
                                 <div className='mb-4'>
@@ -33,11 +34,12 @@ const Register = () => {
                                 <div className='mb-4'>
                                     <label htmlFor="password" className='text-sm mb-2 inline-block'>Password</label>
                                     <div className='relative'>
-                                        <input type={showPassword ? 'text' : 'password'} name='password' className='w-full px-6 py-3.5 border border-dark-04 rounded-md focus:outline-0 focus:border-ps-primary' placeholder='*************' required />
+                                        <input type={showPassword ? 'text' : 'password'} name='password' className={`${passwordError ? 'border-red-500 text-red-500 focus:border-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='*************' required />
                                         <span onClick={() => setShowPassword(!showPassword)} className='absolute right-5 top-[50%] -translate-y-[50%] text-xl cursor-pointer text-dark-2 hover:text-dark-1 duration-150'>
                                             {showPassword ? <FaEye /> : <IoEyeOff />}
                                         </span>
                                     </div>
+                                    <span className={`${passwordError ? 'block' : 'hidden'} text-[12px] mt-1 text-red-500`}>{passwordError}</span>
                                 </div>
                                 <div className='w-full'>
                                     <button className='w-full button mt-4 l-r-b'>Register</button>
