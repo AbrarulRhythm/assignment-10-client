@@ -103,7 +103,7 @@ const Header = () => {
                                                         </Link>
                                                     </li>
                                                     <li>
-                                                        <Link to='/' className='flex items-center px-4 py-2 gap-2 hover:bg-gray-100'>
+                                                        <Link to='/manage-my-foods' className='flex items-center px-4 py-2 gap-2 hover:bg-gray-100'>
                                                             <BsBoxes className='text-lg' /> Manage My Foods
                                                         </Link>
                                                     </li>

@@ -9,6 +9,7 @@ import AvailableFoods from "../pages/AvailableFoods/AvailableFoods";
 import { axiosInstance } from '../hooks/useAxios';
 import PrivateRoute from "../context/PrivateRoute";
 import FoodDetails from "../pages/FoodDetails/FoodDetails";
+import ManageMyFoods from "../pages/ManageMyFoods/ManageMyFoods";
 
 export const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
                     return data.data;
                 },
                 element: <PrivateRoute><FoodDetails></FoodDetails></PrivateRoute>
+            },
+            {
+                path: 'manage-my-foods',
+                element: <PrivateRoute><ManageMyFoods></ManageMyFoods></PrivateRoute>
             }
         ]
     }
