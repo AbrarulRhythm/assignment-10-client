@@ -6,6 +6,7 @@ import Register from "../pages/Register/Register";
 import SignIn from "../pages/SignIn/SignIn";
 import AddFood from "../pages/AddFood/AddFood";
 import AvailableFoods from "../pages/AvailableFoods/AvailableFoods";
+import { axiosInstance } from '../hooks/useAxios';
 
 export const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'available-foods',
+                loader: async () => {
+                    const data = await axiosInstance.get('/foods');
+                    return data.data;
+                },
                 Component: AvailableFoods
             }
         ]

@@ -43,7 +43,7 @@ const blogData = [
 ];
 
 const fetchFeaturedFoods = async (axiosInstance) => {
-    const res = await axiosInstance.get("/featured-foods");
+    const res = await axiosInstance.get('/featured-foods');
     return res.data;
 };
 
