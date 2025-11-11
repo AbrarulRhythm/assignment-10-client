@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import HeroSlider from '../../components/HeroSlider/HeroSlider';
 import PrimaryCard from '../../components/PrimaryCard/PrimaryCard';
 import SectionTitle from '../../components/SectionTitle/SectionTitle';
-import FoodCard from '../../components/FoodCard/FoodCard';
 import { Link } from 'react-router';
 import CommunityImpact from '../../components/CommunityImpact/CommunityImpact';
 import OurPartners from '../../components/OurPartners/OurPartners';
 import BlogCard from '../../components/BlogCard/BlogCard';
+import useAxios from '../../hooks/useAxios';
+import FeaturedFoods from '../../components/FeaturedFoods/FeaturedFoods';
 
 const blogData = [
     {
@@ -41,7 +42,15 @@ const blogData = [
     }
 ];
 
+const fetchFeaturedFoods = async (axiosInstance) => {
+    const res = await axiosInstance.get("/featured-foods");
+    return res.data;
+};
+
 const Home = () => {
+    const axiosInstance = useAxios();
+    const featuredFoodsPromise = fetchFeaturedFoods(axiosInstance);
+
     return (
         <>
             <HeroSlider></HeroSlider>
@@ -57,10 +66,12 @@ const Home = () => {
                         classes='text-center mb-10 lg:mb-12'
                     ></SectionTitle>
 
-                    <div className='flex flex-wrap -mx-3'>
-                        <FoodCard></FoodCard>
-                        <FoodCard></FoodCard>
-                        <FoodCard></FoodCard>
+                    <div className='featured-foods-wrap'>
+                        <Suspense fallback={<p>Featured food is loaidng...</p>}>
+                            <FeaturedFoods
+                                featuredFoodsPromise={featuredFoodsPromise}
+                            ></FeaturedFoods>
+                        </Suspense>
                     </div>
                     <div className='mt-6 text-center'>
                         <Link to='/' className='button'>Show All Foods</Link>
