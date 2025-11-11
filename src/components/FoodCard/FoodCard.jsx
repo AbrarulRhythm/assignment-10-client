@@ -54,7 +54,7 @@ const FoodCard = ({ food }) => {
                             <span className='block text-[12px] font-medium'>{donatorNumber ? donatorNumber : 'not available'}</span>
                         </div>
                     </div>
-                    <Link to='/' className='bg-card hover:bg-ps-primary hover:text-white duration-300 rounded-md px-4 py-3 text-ps-primary w-full flex items-center justify-center gap-1.5 font-medium'>
+                    <Link to={`/foods/${_id}`} className='bg-card hover:bg-ps-primary hover:text-white duration-300 rounded-md px-4 py-3 text-ps-primary w-full flex items-center justify-center gap-1.5 font-medium'>
                         View Details <TbListDetails className='text-lg' />
                     </Link>
                 </div>
