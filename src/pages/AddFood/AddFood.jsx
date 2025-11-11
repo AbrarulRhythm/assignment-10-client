@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../hooks/useAuth';
+import Swal from 'sweetalert2';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const AddFood = () => {
     const { user } = useAuth();
+    const axiosSecure = useAxiosSecure();
     const {
         register,
         handleSubmit,
@@ -24,7 +27,19 @@ const AddFood = () => {
 
     // Handle Add Food
     const handleAddFood = (foodData) => {
-        console.log(foodData);
+        axiosSecure.post('/foods', foodData)
+            .then((data) => {
+                if (data.data.insertedId) {
+                    reset(); // reset form
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Food added successfully!",
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                }
+            })
     }
 
     return (
@@ -128,7 +143,7 @@ const AddFood = () => {
                                     {/* Additional Notes  */}
                                     <div className='w-full md:w-12/12 px-3'>
                                         <div className='mb-4'>
-                                            <label htmlFor="name" className='text-sm mb-2 inline-block'>Additional Notes</label>
+                                            <label htmlFor="name" className='text-sm mb-2 inline-block'>Additional Notes (Optional)</label>
                                             <textarea {...register('additionalNotes')} cols="30" rows='4' className='w-full px-6 py-3.5 border  rounded-md focus:outline-0 border-dark-04 focus:border-ps-primary text-body' placeholder='Additional Notes'></textarea>
                                         </div>
                                     </div>
@@ -165,6 +180,15 @@ const AddFood = () => {
                                                 )}
                                                 className={`${errors.donatorEmail ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='olivernoha@gmail.com' />
                                             <span className={`${errors.donatorEmail ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.donatorEmail && errors.donatorEmail.message}</span>
+                                        </div>
+                                    </div>
+                                    {/* Donator Number  */}
+                                    <div className='w-full md:w-12/12 px-3'>
+                                        <div className='mb-4'>
+                                            <label htmlFor="number" className='text-sm mb-2 inline-block'>Donator's Number (Optional)</label>
+                                            <input type="number"
+                                                {...register('donatorNumber')}
+                                                className='w-full px-6 py-3.5 border  rounded-md focus:outline-0 border-dark-04 focus:border-ps-primary text-body' placeholder='(555) 987-1234' />
                                         </div>
                                     </div>
                                     {/* Donator Image */}
