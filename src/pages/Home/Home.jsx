@@ -74,7 +74,7 @@ const Home = () => {
                         </Suspense>
                     </div>
                     <div className='mt-6 text-center'>
-                        <Link to='/available-foods' className='button'>Show All Foods</Link>
+                        <Link to='/foods' className='button'>Show All Foods</Link>
                     </div>
                 </div>
             </section>

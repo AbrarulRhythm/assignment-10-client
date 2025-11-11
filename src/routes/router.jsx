@@ -32,7 +32,7 @@ export const router = createBrowserRouter([
                 element: <PrivateRoute><AddFood></AddFood></PrivateRoute>
             },
             {
-                path: 'available-foods',
+                path: 'foods',
                 loader: async () => {
                     const data = await axiosInstance.get('/foods');
                     return data.data;
