@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import food from '../../assets/food.png';
 import location from '../../assets/location_lg.png';
 import quantity from '../../assets/FoodQuantity.png';
+import Swal from 'sweetalert2';
 
 const ManageMyFoods = () => {
     const { user } = useAuth();
@@ -18,6 +19,34 @@ const ManageMyFoods = () => {
                 setFoods(data.data);
             })
     }, [user, axiosSecure])
+
+    const handleDeleteFood = (_id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/foods/${_id}`)
+                    .then((data) => {
+                        if (data.data.deletedCount) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your food has been deleted.",
+                                icon: "success"
+                            });
+
+                            const remaningFoods = foods.filter(food => food._id !== _id);
+                            setFoods(remaningFoods);
+                        }
+                    })
+            }
+        });
+    }
 
     return (
         <>
@@ -79,7 +108,9 @@ const ManageMyFoods = () => {
                                                                 <td className='text-end'>
                                                                     <div className=' space-x-3'>
                                                                         <Link to={`/update-food/${food._id}`} className='text-sm text-yellow-500 border border-yellow-500 font-medium px-4 py-1 rounded-sm hover:bg-yellow-500 hover:text-white duration-300 cursor-pointer'>Update</Link>
-                                                                        <button className='text-sm text-red-500 border border-red-500 font-medium px-4 py-1 rounded-sm hover:bg-red-500 hover:text-white duration-300 cursor-pointer'>Delete</button>
+                                                                        <button
+                                                                            onClick={() => handleDeleteFood(food._id)}
+                                                                            className='text-sm text-red-500 border border-red-500 font-medium px-4 py-1 rounded-sm hover:bg-red-500 hover:text-white duration-300 cursor-pointer'>Delete</button>
                                                                     </div>
                                                                 </td>
                                                             </tr>
