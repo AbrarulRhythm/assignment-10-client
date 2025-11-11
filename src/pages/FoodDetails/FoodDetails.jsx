@@ -10,7 +10,7 @@ import location from '../../assets/location_lg.png';
 import exp_date from '../../assets/exp_date_lg.png';
 
 const FoodDetails = () => {
-    const { _id, additionalNotes, foodStatus, donatorName, donatorImage, foodName, foodImage, foodQuantity, expireDate, pickupLocation, donatorNumber, donatorEmail } = useLoaderData();
+    const { _id, additionalNotes, foodStatus, donatorName, donatorImage, foodName, foodImage, foodQuantity, expireDate, created_at, pickupLocation, donatorNumber, donatorEmail } = useLoaderData();
 
     return (
         <section className='py-10 lg:py-20'>
@@ -59,7 +59,7 @@ const FoodDetails = () => {
                                 <li className='flex items-center gap-2.5'>
                                     <img src={create_date} className='w-6' alt='icons' />
                                     <div>
-                                        <span className='font-medium'>Create Date:</span>
+                                        <span className='font-medium'>Create Date:</span> {created_at ? created_at[0] : 'data not found'}
                                     </div>
                                 </li>
                                 <li className='flex items-center gap-2.5'>

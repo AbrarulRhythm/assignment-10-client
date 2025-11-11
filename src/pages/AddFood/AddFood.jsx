@@ -23,11 +23,29 @@ const AddFood = () => {
                 donatorImage: user?.photoURL || '',
             })
         }
-    }, [user, reset])
+    }, [user, reset]);
+
+    const currentDate = new Date();
+    // Format date only
+    const formattedDate = currentDate.toLocaleDateString("en-US", {
+        weekday: 'short',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+
+    // Format time only
+    const formattedTime = currentDate.toLocaleTimeString("en-US", {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+    });
 
     // Handle Add Food
     const handleAddFood = (foodData) => {
-        axiosSecure.post('/foods', foodData)
+        const newFoodData = { ...foodData, created_at: [formattedDate, formattedTime] };
+
+        axiosSecure.post('/foods', newFoodData)
             .then((data) => {
                 if (data.data.insertedId) {
                     reset(); // reset form
@@ -65,7 +83,7 @@ const AddFood = () => {
                                                     {
                                                         required: 'Name is required',
                                                         minLength: { value: 3, message: 'Name must be at least 3 characters long.' },
-                                                        maxLength: { value: 30, message: 'Name cannot be longer than 30 characters.' }
+                                                        maxLength: { value: 50, message: 'Name cannot be longer than 50 characters.' }
                                                     }
                                                 )}
                                                 className={`${errors.foodName ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='Homemade Vegetable Soup' />
