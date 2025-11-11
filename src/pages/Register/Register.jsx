@@ -90,6 +90,8 @@ const Register = () => {
 
     return (
         <section className='py-12'>
+            <title>Sign up for PlateShare</title>
+
             <div className='container'>
                 <div className='flex flex-wrap -mx-3 justify-center'>
                     <div className='w-full md:w-9/12 lg:w-6/12 px-3'>

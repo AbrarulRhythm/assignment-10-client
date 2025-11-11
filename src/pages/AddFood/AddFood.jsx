@@ -44,6 +44,8 @@ const AddFood = () => {
 
     return (
         <section className='py-10 lg:py-20'>
+            <title>Add Food - PlateShare</title>
+
             <div className='container'>
                 <div className='flex flex-wrap -mx-3 justify-center'>
                     <div className='w-full md:w-11/12 lg:w-8/12 px-3'>
