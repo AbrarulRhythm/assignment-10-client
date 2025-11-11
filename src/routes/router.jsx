@@ -7,6 +7,7 @@ import SignIn from "../pages/SignIn/SignIn";
 import AddFood from "../pages/AddFood/AddFood";
 import AvailableFoods from "../pages/AvailableFoods/AvailableFoods";
 import { axiosInstance } from '../hooks/useAxios';
+import PrivateRoute from "../context/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -28,7 +29,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'add-food',
-                element: <AddFood></AddFood>
+                element: <PrivateRoute><AddFood></AddFood></PrivateRoute>
             },
             {
                 path: 'available-foods',
