@@ -74,11 +74,11 @@ const ManageMyFoods = () => {
                                                                     </div>
                                                                 </td>
                                                                 <td>
-                                                                    <span className='text-[12px] bg-green-500 text-green-900 font-medium px-3.5 py-1.5 rounded-full'>{food.foodStatus}</span>
+                                                                    <span className={`${food.foodStatus === 'Available' ? 'bg-green-500 text-green-900' : 'bg-yellow-500 text-yellow-900'} text-[12px] font-medium px-3.5 py-1.5 rounded-full`}>{food.foodStatus}</span>
                                                                 </td>
                                                                 <td className='text-end'>
                                                                     <div className=' space-x-3'>
-                                                                        <button className='text-sm text-yellow-500 border border-yellow-500 font-medium px-4 py-1 rounded-sm hover:bg-yellow-500 hover:text-white duration-300 cursor-pointer'>Update</button>
+                                                                        <Link to={`/update-food/${food._id}`} className='text-sm text-yellow-500 border border-yellow-500 font-medium px-4 py-1 rounded-sm hover:bg-yellow-500 hover:text-white duration-300 cursor-pointer'>Update</Link>
                                                                         <button className='text-sm text-red-500 border border-red-500 font-medium px-4 py-1 rounded-sm hover:bg-red-500 hover:text-white duration-300 cursor-pointer'>Delete</button>
                                                                     </div>
                                                                 </td>

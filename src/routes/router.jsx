@@ -10,6 +10,7 @@ import { axiosInstance } from '../hooks/useAxios';
 import PrivateRoute from "../context/PrivateRoute";
 import FoodDetails from "../pages/FoodDetails/FoodDetails";
 import ManageMyFoods from "../pages/ManageMyFoods/ManageMyFoods";
+import UpdateFood from "../pages/UpdateFood/UpdateFood";
 
 export const router = createBrowserRouter([
     {
@@ -52,6 +53,14 @@ export const router = createBrowserRouter([
             {
                 path: 'manage-my-foods',
                 element: <PrivateRoute><ManageMyFoods></ManageMyFoods></PrivateRoute>
+            },
+            {
+                path: 'update-food/:id',
+                loader: async ({ params }) => {
+                    const data = await axiosInstance.get(`/foods/${params.id}`);
+                    return data.data;
+                },
+                element: <PrivateRoute><UpdateFood></UpdateFood></PrivateRoute>
             }
         ]
     }
