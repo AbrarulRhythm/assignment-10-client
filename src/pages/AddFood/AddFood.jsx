@@ -14,6 +14,7 @@ const AddFood = () => {
     useEffect(() => {
         if (user) {
             reset({
+                foodStatus: 'Available',
                 donatorName: user?.displayName || '',
                 donatorEmail: user?.email || '',
                 donatorImage: user?.photoURL || '',
@@ -94,6 +95,20 @@ const AddFood = () => {
                                                 )}
                                                 className={`${errors.expireDate ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='Enter food quantity' />
                                             <span className={`${errors.expireDate ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.expireDate && errors.expireDate.message}</span>
+                                        </div>
+                                    </div>
+                                    {/* Pickup Location  */}
+                                    <div className='w-full md:w-12/12 px-3'>
+                                        <div className='mb-4'>
+                                            <label htmlFor="name" className='text-sm mb-2 inline-block'>Food Status</label>
+                                            <input type="text"
+                                                {...register('foodStatus',
+                                                    {
+                                                        required: 'Food Status is required'
+                                                    }
+                                                )}
+                                                className={`${errors.foodStatus ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-green-400'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='Food Status' readOnly />
+                                            <span className={`${errors.foodStatus ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.foodStatus && errors.foodStatus.message}</span>
                                         </div>
                                     </div>
                                     {/* Pickup Location  */}
