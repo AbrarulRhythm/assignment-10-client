@@ -16,7 +16,7 @@ const FoodRequestTable = ({ food, index, pageType }) => {
     }, [axiosSecure, food.foodId]);
 
     // Handle Accept Request
-    const handleAcceptRequest = (id, status) => {
+    const handleFoodRequest = (id, status) => {
         const foodRequestData = { status: status };
         const foodStatus = { foodStatus: 'Donated' };
 
@@ -24,21 +24,27 @@ const FoodRequestTable = ({ food, index, pageType }) => {
         axiosSecure.patch(`/food-request/${id}`, foodRequestData)
             .then((data) => {
                 if (data.data.modifiedCount) {
-                    // Update Food Status
-                    axiosSecure.patch(`/food-status/${foodData._id}`, foodStatus)
-                        .then((data) => {
-                            if (data.data.modifiedCount) {
-                                Swal.fire({
-                                    position: "center",
-                                    icon: "success",
-                                    title: "Donated! 🎉",
-                                    showConfirmButton: false,
-                                    timer: 2000
-                                })
+                    if (status === 'Accepted') {
+                        // Update Food Status
+                        axiosSecure.patch(`/food-status/${foodData._id}`, foodStatus)
+                            .then((data) => {
+                                if (data.data.modifiedCount) {
+                                    Swal.fire({
+                                        position: "center",
+                                        icon: "success",
+                                        title: "Donated! 🎉",
+                                        showConfirmButton: false,
+                                        timer: 2000
+                                    })
 
-                                setStatus('Accepted');
-                            }
-                        })
+                                    setStatus(foodRequestData.status);
+                                }
+                            })
+                    }
+                    else {
+                        setStatus(foodRequestData.status);
+                    }
+
                 }
             })
     }
@@ -77,15 +83,20 @@ const FoodRequestTable = ({ food, index, pageType }) => {
                 </div>
             </td>
             <td>
-                <span className={`${status === 'Accepted' ? 'bg-green-500 text-green-900' : 'bg-yellow-500 text-yellow-900'} text-[12px] font-medium px-3.5 py-1.5 rounded-full`}>{status}</span>
+                <span className={`
+                    ${status === 'Accepted'
+                        ? 'bg-green-500 text-green-900'
+                        : status === 'Rejected'
+                            ? 'bg-red-300 text-red-800'
+                            : 'bg-yellow-500 text-yellow-900'} text-[12px] font-medium px-3.5 py-1.5 rounded-full`}>{status}</span>
             </td>
             <td className='text-end'>
                 <div className=' space-x-3'>
                     {
                         pageType === 'foodDetails' ? (
                             <>
-                                <button onClick={() => handleAcceptRequest(food._id, 'Accepted')} className='text-sm text-green-500 border border-green-500 font-medium px-4 py-1 rounded-sm hover:bg-green-500 hover:text-white duration-300 cursor-pointer'>Accept </button>
-                                <button className='text-sm text-red-500 border border-red-500 font-medium px-4 py-1 rounded-sm hover:bg-red-500 hover:text-white duration-300 cursor-pointer'>Reject</button>
+                                <button onClick={() => handleFoodRequest(food._id, 'Accepted')} className='text-sm text-green-500 border border-green-500 font-medium px-4 py-1 rounded-sm hover:bg-green-500 hover:text-white duration-300 cursor-pointer'>Accept </button>
+                                <button onClick={() => handleFoodRequest(food._id, 'Rejected')} className='text-sm text-red-500 border border-red-500 font-medium px-4 py-1 rounded-sm hover:bg-red-500 hover:text-white duration-300 cursor-pointer'>Reject</button>
                             </>
                         ) : (
                             <button className='text-sm text-red-500 border border-red-500 font-medium px-4 py-1 rounded-sm hover:bg-red-500 hover:text-white duration-300 cursor-pointer'>Delete</button>
