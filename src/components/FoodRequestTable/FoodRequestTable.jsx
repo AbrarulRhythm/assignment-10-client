@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import quantity from '../../assets/FoodQuantity.png';
 
-const FoodRequestTable = ({ food, index }) => {
+const FoodRequestTable = ({ food, index, pageType }) => {
     const axiosSecure = useAxiosSecure();
     const [foodData, setFoodData] = useState([]);
 
@@ -28,10 +28,16 @@ const FoodRequestTable = ({ food, index }) => {
             </td>
             <td>
                 <div className='flex items-center gap-3'>
-                    <img src={food.requesterImage} className='w-14 h-14 object-cover rounded-full' alt="Requester Image" />
+                    <img
+                        src={
+                            pageType === 'foodDetails'
+                                ? food.requesterImage
+                                : foodData.donatorImage
+                        }
+                        className='w-14 h-14 object-cover rounded-full' alt="Requester Image" />
                     <div>
-                        <h5 className='text-heading font-semibold'>{food.requesterName}</h5>
-                        <span className='inline-block text-sm'>{food.contact}</span>
+                        <h5 className='text-heading font-semibold'>{pageType === 'foodDetails' ? food.requesterName : foodData.donatorName}</h5>
+                        <span className='inline-block text-sm'>{pageType === 'foodDetails' ? food.contact : (foodData.donatorNumber ? foodData.donatorNumber : 'data not found')}</span>
                     </div>
                 </div>
             </td>

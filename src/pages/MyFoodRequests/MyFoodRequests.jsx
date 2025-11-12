@@ -55,7 +55,7 @@ const MyFoodRequests = () => {
                                                                 key={food._id}
                                                                 food={food}
                                                                 index={index}
-                                                                table='myRequest'
+                                                                pageType="myRequests"
                                                             ></FoodRequestTable>
                                                         )
                                                     })

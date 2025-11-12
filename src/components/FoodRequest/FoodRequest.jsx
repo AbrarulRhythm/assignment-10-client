@@ -46,6 +46,7 @@ const FoodRequest = ({ foodId }) => {
                                                             key={food._id}
                                                             food={food}
                                                             index={index}
+                                                            pageType="foodDetails"
                                                         ></FoodRequestTable>
                                                     )
                                                 })
