@@ -49,6 +49,44 @@ p {
   @apply mx-auto sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px] xxl:max-w-[1320px] px-3;
 }
 
+/* ========== Loader ========== */
+.loader {
+  width: 45px;
+  aspect-ratio: .75;
+  --c: no-repeat linear-gradient(#000 0 0);
+  background:
+    var(--c) 0% 50%,
+    var(--c) 50% 50%,
+    var(--c) 100% 50%;
+  animation: l7 1s infinite linear alternate;
+}
+
+@keyframes l7 {
+  0% {
+    background-size: 20% 50%, 20% 50%, 20% 50%
+  }
+
+  20% {
+    background-size: 20% 20%, 20% 50%, 20% 50%
+  }
+
+  40% {
+    background-size: 20% 100%, 20% 20%, 20% 50%
+  }
+
+  60% {
+    background-size: 20% 50%, 20% 100%, 20% 20%
+  }
+
+  80% {
+    background-size: 20% 50%, 20% 50%, 20% 100%
+  }
+
+  100% {
+    background-size: 20% 50%, 20% 50%, 20% 50%
+  }
+}
+
 /* ====================== Buttons ====================== */
 .button {
   @apply inline-block text-base font-medium py-3 px-8 lg:py-4 lg:px-10 rounded-md cursor-pointer text-white bg-ps-primary outline-none transition-all duration-300 focus:outline-0 hover:shadow-btn-inner;

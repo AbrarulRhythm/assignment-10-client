@@ -8,6 +8,7 @@ import OurPartners from '../../components/OurPartners/OurPartners';
 import BlogCard from '../../components/BlogCard/BlogCard';
 import useAxios from '../../hooks/useAxios';
 import FeaturedFoods from '../../components/FeaturedFoods/FeaturedFoods';
+import LoadingPage from '../LoadingPage/LoadingPage';
 
 const blogData = [
     {
@@ -69,7 +70,7 @@ const Home = () => {
                     </div>
 
                     <div className='featured-foods-wrap'>
-                        <Suspense fallback={<p>Featured food is loaidng...</p>}>
+                        <Suspense fallback={<div className='text-center py-10'><span className="loading loading-bars loading-xl"></span></div>}>
                             <FeaturedFoods
                                 featuredFoodsPromise={featuredFoodsPromise}
                             ></FeaturedFoods>

@@ -10,13 +10,15 @@ const MyFoodRequests = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const [foodRequest, setFoodRequest] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         axiosSecure.get(`/food-request?email=${user?.email}`)
             .then((data) => {
-                setFoodRequest(data.data)
-            })
-    })
+                setFoodRequest(data.data);
+                setLoading(false);
+            });
+    });
 
     return (
         <>
@@ -47,7 +49,19 @@ const MyFoodRequests = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {
+                                            {/* Loading row */}
+                                            {loading && (
+                                                <tr>
+                                                    <td colSpan='6' className='text-center'>
+                                                        <div className='py-10'>
+                                                            <span className="loading loading-bars loading-xl"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            )}
+
+                                            {/* Data Row */}
+                                            {!loading && (
                                                 foodRequest.length > 0 ? (
                                                     foodRequest.map((food, index) => {
                                                         return (
@@ -70,7 +84,7 @@ const MyFoodRequests = () => {
                                                         </td>
                                                     </tr>
                                                 )
-                                            }
+                                            )}
                                         </tbody>
                                     </table>
                                 </div>

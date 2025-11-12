@@ -8,12 +8,14 @@ const FoodRequest = ({ foodId }) => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const [foodRequest, setFoodRequest] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         axiosSecure.get(`/food-request?id=${foodId}`)
             .then((data) => {
                 setFoodRequest(data.data);
-            })
+                setLoading(false);
+            });
     }, [axiosSecure, user, foodId]);
 
     return (
@@ -38,7 +40,19 @@ const FoodRequest = ({ foodId }) => {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {
+                                        {/* Loading Row */}
+                                        {loading && (
+                                            <tr>
+                                                <td colSpan='6' className='text-center'>
+                                                    <div className='py-10'>
+                                                        <span className="loading loading-bars loading-xl"></span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        )}
+
+                                        {/* Data Row */}
+                                        {!loading && (
                                             foodRequest.length > 0 ? (
                                                 foodRequest.map((food, index) => {
                                                     return (
@@ -60,7 +74,7 @@ const FoodRequest = ({ foodId }) => {
                                                     </td>
                                                 </tr>
                                             )
-                                        }
+                                        )}
                                     </tbody>
                                 </table>
                             </div>

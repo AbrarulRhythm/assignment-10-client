@@ -3,7 +3,7 @@ import SectionBanner from '../../components/SectionBanner/SectionBanner';
 import useAuth from '../../hooks/useAuth';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { Link } from 'react-router';
-import food from '../../assets/food.png';
+import foodIcon from '../../assets/food.png';
 import location from '../../assets/location_lg.png';
 import quantity from '../../assets/FoodQuantity.png';
 import Swal from 'sweetalert2';
@@ -12,11 +12,13 @@ const ManageMyFoods = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const [foods, setFoods] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         axiosSecure.get(`/my-foods?email=${user.email}`)
             .then((data) => {
                 setFoods(data.data);
+                setLoading(false);
             })
     }, [user, axiosSecure])
 
@@ -76,7 +78,19 @@ const ManageMyFoods = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {
+                                            {/* Loading Row */}
+                                            {loading && (
+                                                <tr>
+                                                    <td colSpan='6' className='text-center'>
+                                                        <div className='py-10'>
+                                                            <span className="loading loading-bars loading-xl"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            )}
+
+                                            {/* Data Row */}
+                                            {!loading && (
                                                 foods.length > 0 ? (
                                                     foods.map((food, index) => {
                                                         return (
@@ -129,14 +143,14 @@ const ManageMyFoods = () => {
                                                     <tr>
                                                         <td colSpan='6' className='text-center'>
                                                             <div className='py-6'>
-                                                                <img src={food} className='mx-auto mb-4' alt='Food Icon' />
+                                                                <img src={foodIcon} className='mx-auto mb-4' alt='Food Icon' />
                                                                 <h6 className='text-base font-medium'>You have not added any food yet.</h6>
                                                                 <Link to='/add-food' className='button button-sm inline-block mt-5'>Add your first food</Link>
                                                             </div>
                                                         </td>
                                                     </tr>
                                                 )
-                                            }
+                                            )}
                                         </tbody>
                                     </table>
                                 </div>
