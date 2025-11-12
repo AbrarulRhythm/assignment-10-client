@@ -48,7 +48,7 @@ const SignIn = () => {
     }
 
     return (
-        <section className='py-12'>
+        <section className='py-12 mt-[91px] lg:mt-[110px]'>
             <title>PlateShare - log in or sign up</title>
 
             <div className='container'>

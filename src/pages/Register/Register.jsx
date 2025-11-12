@@ -89,7 +89,7 @@ const Register = () => {
     }
 
     return (
-        <section className='py-12'>
+        <section className='py-12 mt-[91px] lg:mt-[110px]'>
             <title>Sign up for PlateShare</title>
 
             <div className='container'>
