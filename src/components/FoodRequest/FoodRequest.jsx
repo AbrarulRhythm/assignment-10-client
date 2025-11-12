@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import FoodRequestTable from '../FoodRequestTable/FoodRequestTable';
+import useAuth from '../../hooks/useAuth';
+import foodRequestIcon from '../../assets/food-request-icon.png';
 
-const FoodRequest = () => {
+const FoodRequest = ({ foodId }) => {
+    const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const [foodRequest, setFoodRequest] = useState([]);
 
     useEffect(() => {
-        axiosSecure.get('/food-request')
+        axiosSecure.get(`/food-request?id=${foodId}`)
             .then((data) => {
                 setFoodRequest(data.data);
             })
-    }, [axiosSecure]);
+    }, [axiosSecure, user, foodId]);
 
     return (
         <section className='pb-10 lg:pb-20'>
@@ -36,7 +39,7 @@ const FoodRequest = () => {
                                     </thead>
                                     <tbody>
                                         {
-                                            foodRequest ? (
+                                            foodRequest.length > 0 ? (
                                                 foodRequest.map((food, index) => {
                                                     return (
                                                         <FoodRequestTable
@@ -48,11 +51,10 @@ const FoodRequest = () => {
                                                 })
                                             ) : (
                                                 <tr>
-                                                    <td colSpan='4' className='text-center'>
+                                                    <td colSpan='6' className='text-center'>
                                                         <div className='py-6'>
-                                                            {/* <img src={food} className='mx-auto mb-4' alt='Food Icon' /> */}
-                                                            <h6 className='text-base font-medium'>You have not added any food yet.</h6>
-                                                            <Link to='/add-food' className='button button-sm inline-block mt-5'>Add your first food</Link>
+                                                            <img src={foodRequestIcon} className='mx-auto mb-4' alt='Food Icon' />
+                                                            <h6 className='text-base font-medium'>You do not have any food request yet.</h6>
                                                         </div>
                                                     </td>
                                                 </tr>

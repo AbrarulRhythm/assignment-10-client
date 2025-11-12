@@ -1,6 +1,11 @@
 import React, { useRef } from 'react';
 import { Link, useLoaderData } from 'react-router';
 import { FaArrowLeftLong } from 'react-icons/fa6';
+import { useForm } from 'react-hook-form';
+import useAuth from '../../hooks/useAuth';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
+import FoodRequest from '../../components/FoodRequest/FoodRequest';
 
 // Image
 import create_date from '../../assets/create_date.png';
@@ -8,11 +13,6 @@ import food_id from '../../assets/food_id.png';
 import food_quantity from '../../assets/food_quantity_lg.png';
 import location from '../../assets/location_lg.png';
 import exp_date from '../../assets/exp_date_lg.png';
-import { useForm } from 'react-hook-form';
-import useAuth from '../../hooks/useAuth';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
-import Swal from 'sweetalert2';
-import FoodRequest from '../../components/FoodRequest/FoodRequest';
 
 const FoodDetails = () => {
     const { _id, additionalNotes, foodStatus, donatorName, donatorImage, foodName, foodImage, foodQuantity, expireDate, created_at, pickupLocation, donatorNumber, donatorEmail } = useLoaderData();
@@ -188,7 +188,9 @@ const FoodDetails = () => {
             </section>
 
             {donatorEmail === user?.email && (
-                <FoodRequest></FoodRequest>
+                <FoodRequest
+                    foodId={_id}
+                ></FoodRequest>
             )}
         </>
     );

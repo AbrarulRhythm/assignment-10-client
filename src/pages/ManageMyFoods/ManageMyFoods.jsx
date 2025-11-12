@@ -77,7 +77,7 @@ const ManageMyFoods = () => {
                                         </thead>
                                         <tbody>
                                             {
-                                                foods ? (
+                                                foods.length > 0 ? (
                                                     foods.map((food, index) => {
                                                         return (
                                                             <tr key={food._id}>
@@ -118,7 +118,7 @@ const ManageMyFoods = () => {
                                                     })
                                                 ) : (
                                                     <tr>
-                                                        <td colSpan='4' className='text-center'>
+                                                        <td colSpan='6' className='text-center'>
                                                             <div className='py-6'>
                                                                 <img src={food} className='mx-auto mb-4' alt='Food Icon' />
                                                                 <h6 className='text-base font-medium'>You have not added any food yet.</h6>
