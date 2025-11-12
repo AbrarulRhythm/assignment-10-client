@@ -54,7 +54,7 @@ const UpdateFood = () => {
     }
 
     return (
-        <section className='py-10 lg:py-20'>
+        <section className='py-10 lg:py-20 mt-[91px] lg:mt-[110px]'>
             <title>Update Food - PlateShare</title>
 
             <div className='container'>
