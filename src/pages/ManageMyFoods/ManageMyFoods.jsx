@@ -103,7 +103,16 @@ const ManageMyFoods = () => {
                                                                     </div>
                                                                 </td>
                                                                 <td>
-                                                                    <span className={`${food.foodStatus === 'Available' ? 'bg-green-500 text-green-900' : 'bg-yellow-500 text-yellow-900'} text-[12px] font-medium px-3.5 py-1.5 rounded-full`}>{food.foodStatus}</span>
+                                                                    <span className={`
+                                                                        ${food.foodStatus === 'Available'
+                                                                            ? 'bg-green-500 text-green-900'
+                                                                            : food.foodStatus === 'Donated'
+                                                                                ? 'bg-gray-300 text-gray-800'
+                                                                                : 'bg-yellow-500 text-yellow-900'
+                                                                        } text-[12px] font-medium px-3.5 py-1.5 rounded-full
+                                                                        `}>
+                                                                        {food.foodStatus}
+                                                                    </span>
                                                                 </td>
                                                                 <td className='text-end'>
                                                                     <div className=' space-x-3'>

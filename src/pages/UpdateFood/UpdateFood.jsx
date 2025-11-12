@@ -139,6 +139,7 @@ const UpdateFood = () => {
                                                 <option disabled={true}>Select Food Status</option>
                                                 <option>Available</option>
                                                 <option>Pending</option>
+                                                <option>Donated</option>
                                             </select>
                                             <span className={`${errors.foodStatus ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.foodStatus && errors.foodStatus.message}</span>
                                         </div>
