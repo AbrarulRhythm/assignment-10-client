@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
-import quantity from '../../assets/FoodQuantity.png';
 import Swal from 'sweetalert2';
 
 const FoodRequestTable = ({ food, index, pageType }) => {
@@ -79,7 +78,9 @@ const FoodRequestTable = ({ food, index, pageType }) => {
             </td>
             <td>
                 <div className='flex items-center gap-2'>
-                    <img src={quantity} className='w-6' alt='Quantity icon' /> <p><span>Quantity:</span> {foodData.foodQuantity}</p>
+                    <div className='text-sm'>
+                        {food.whyNeedFood}
+                    </div>
                 </div>
             </td>
             <td>
@@ -95,11 +96,11 @@ const FoodRequestTable = ({ food, index, pageType }) => {
                     {
                         pageType === 'foodDetails' ? (
                             <>
-                                <button onClick={() => handleFoodRequest(food._id, 'Accepted')} className='text-sm text-green-500 border border-green-500 font-medium px-4 py-1 rounded-sm hover:bg-green-500 hover:text-white duration-300 cursor-pointer'>Accept </button>
-                                <button onClick={() => handleFoodRequest(food._id, 'Rejected')} className='text-sm text-red-500 border border-red-500 font-medium px-4 py-1 rounded-sm hover:bg-red-500 hover:text-white duration-300 cursor-pointer'>Reject</button>
+                                <button onClick={() => handleFoodRequest(food._id, 'Accepted')} className='text-sm text-green-500 border border-green-500 font-medium px-4 py-1 rounded-sm hover:bg-green-500 hover:text-white duration-300 cursor-pointer action-btn' disabled={status === 'Accepted' || status === 'Rejected'}>Accept </button>
+                                <button onClick={() => handleFoodRequest(food._id, 'Rejected')} className='text-sm text-red-500 border border-red-500 font-medium px-4 py-1 rounded-sm hover:bg-red-500 hover:text-white duration-300 cursor-pointer action-btn' disabled={status === 'Accepted' || status === 'Rejected'}>Reject</button>
                             </>
                         ) : (
-                            <button className='text-sm text-red-500 border border-red-500 font-medium px-4 py-1 rounded-sm hover:bg-red-500 hover:text-white duration-300 cursor-pointer'>Delete</button>
+                            <button className='text-sm text-red-500 border border-red-500 font-medium px-4 py-1 rounded-sm hover:bg-red-500 hover:text-white duration-300 cursor-pointer action-btn' disabled={status === 'Accepted' || status === 'Rejected'}>Delete</button>
                         )
                     }
                 </div>

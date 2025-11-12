@@ -62,6 +62,10 @@ p {
   @apply shadow-btn-inner text-white/80 cursor-default;
 }
 
+.action-btn:disabled {
+  @apply bg-gray-300 border-gray-300 text-gray-400 cursor-default
+}
+
 /* [ Table ] */
 /*================================================== */
 thead {

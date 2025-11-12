@@ -33,7 +33,7 @@ const FoodDetails = () => {
 
     // Hnadle Request Food
     const handleRequestFood = (requestData) => {
-        const newRequestData = { ...requestData, requesterEmail: user?.email, requesterName: user?.displayName, requesterImage: user?.photoURL, donatorEmail: donatorEmail, donatorName: donatorName, donatorImage: donatorImage, foodId: _id, status: 'Pending' };
+        const newRequestData = { ...requestData, requesterEmail: user?.email, requesterName: user?.displayName, requesterImage: user?.photoURL, foodId: _id, status: 'Pending' };
 
         axiosSecure.post('/food-request', newRequestData)
             .then((data) => {

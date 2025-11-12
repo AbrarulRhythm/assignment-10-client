@@ -32,7 +32,7 @@ const FoodRequest = ({ foodId }) => {
                                             <th>SL No</th>
                                             <th>Foods</th>
                                             <th>Requester</th>
-                                            <th>Food Quantity</th>
+                                            <th>Why Need Food</th>
                                             <th>Request Status</th>
                                             <th className='text-end'>Action</th>
                                         </tr>
