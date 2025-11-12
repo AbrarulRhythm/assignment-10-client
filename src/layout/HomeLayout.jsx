@@ -7,6 +7,7 @@ import LoadingPage from '../pages/LoadingPage/LoadingPage';
 const HomeLayout = () => {
     const [loading, setloading] = useState(true);
     const [fadeOut, setFadeOut] = useState(false);
+    const [scroll, setScroll] = useState(0);
     const location = useLocation();
 
     useEffect(() => {
@@ -29,6 +30,17 @@ const HomeLayout = () => {
         return () => clearTimeout(timer);
     }, [location.pathname]);
 
+    useEffect(() => {
+        const handleScroll = () => {
+            setScroll(window.scrollY > 0);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        }
+    });
+
     return (
         <>
             {
@@ -40,7 +52,7 @@ const HomeLayout = () => {
                     <>
                         <div className='main-wrapper'>
                             {/* Header */}
-                            <header>
+                            <header className={`${scroll ? 'border-b border-dark-04 shadow' : ''} fixed top-0 left-0 right-0 bg-white z-50`}>
                                 <Header></Header>
                             </header>
                             {/* Header End */}

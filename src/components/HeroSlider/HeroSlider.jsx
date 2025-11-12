@@ -8,7 +8,7 @@ import { FaPlay } from 'react-icons/fa';
 
 const HeroSlider = () => {
     return (
-        <section className='hero-section'>
+        <section className='hero-section pt-[91px] lg:pt-[110px]'>
             <div className='px-5 md:px-6 lg:px-8 2xl:px-10'>
                 <div className='hero py-12 md:py-14 lg:py-[158px] rounded-2xl text-white'>
                     <div className='container'>

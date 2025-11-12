@@ -87,6 +87,36 @@ p {
   }
 }
 
+/* ========== Hamburger Menu ========== */
+.hamburger-menu {
+  @apply py-[5px] px-[11px] rounded-xs my-[18px] mx-[15px] bg-ps-primary;
+}
+
+.hamburger-menu .line {
+  @apply block h-[3px] w-2.5 my-1 bg-white rounded-lg duration-500;
+}
+
+.hamburger-menu .line-2 {
+  @apply w-5;
+}
+
+.hamburger-menu .line-3 {
+  @apply ms-auto;
+}
+
+.hamburger-menu.active .line-1 {
+  transform: rotate(45deg) translate(4px, 1.5px);
+}
+
+.hamburger-menu.active .line-2 {
+  transform: rotate(-45deg);
+}
+
+.hamburger-menu.active .line-3 {
+  transform: rotate(45deg) translate(-3px, -1px);
+}
+
+
 /* ====================== Buttons ====================== */
 .button {
   @apply inline-block text-base font-medium py-3 px-8 lg:py-4 lg:px-10 rounded-md cursor-pointer text-white bg-ps-primary outline-none transition-all duration-300 focus:outline-0 hover:shadow-btn-inner;
@@ -131,11 +161,11 @@ table td {
 /* [ Header ] */
 /*================================================== */
 .header-nav ul {
-  @apply flex items-center justify-center
+  @apply flex flex-col lg:flex-row items-center justify-center
 }
 
 .header-nav ul a {
-  @apply flex items-center px-3.5 font-medium text-heading h-[90px] hover:text-ps-primary duration-300;
+  @apply flex items-center py-2.5 lg:py-0 px-3.5 font-medium text-heading h-auto lg:h-[90px] hover:text-ps-primary duration-300;
 }
 
 .header-nav ul a.active {

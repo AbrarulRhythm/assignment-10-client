@@ -15,6 +15,7 @@ const Header = () => {
     const { user, signOutUser } = useAuth();
     const [openMenu, setOpenMenu] = useState(false);
     const menuRef = useRef(null);
+    const [openNavMenu, setOpenNavMenu] = useState(false);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -43,8 +44,8 @@ const Header = () => {
 
     return (
         <div className='container'>
-            <nav className='priamry-menu py-2.5'>
-                <div className='flex flex-wrap -mx-3 items-center'>
+            <nav className='priamry-menu py-2.5 relative'>
+                <div className='flex flex-wrap -mx-3 items-center justify-between'>
                     <div className='w-6/12 lg:w-3/12 px-3'>
                         {/* Header Logo */}
                         <Link to='/' title='PlateShare'>
@@ -54,11 +55,7 @@ const Header = () => {
                     </div>
 
                     <div className='w-auto lg:w-6/12 px-3'>
-                        {/* <button>
-                            <FaBars />
-                        </button> */}
-
-                        <div className='header-nav'>
+                        <div className={`${openNavMenu ? 'block' : 'hidden lg:block'} header-nav absolute lg:static top-[99%] left-0 right-0 bg-white lg:bg-transparent p-4 lg:p-0 rounded-md border lg:border-0 border-dark-04`}>
                             <ul>
                                 <li>
                                     <NavLink to='/'>Home</NavLink>
@@ -73,12 +70,20 @@ const Header = () => {
                                     <NavLink to='/news'>News</NavLink>
                                 </li>
                             </ul>
-                            {/* <Link to='/' className='button button-sm'>Sign In</Link> */}
+                            <div className='block lg:hidden'>
+                                <Link to='/sign-in' className='button button-sm w-full text-center mt-2'>Sign In</Link>
+                            </div>
                         </div>
                     </div>
 
                     <div className='w-auto lg:w-3/12 px-3'>
                         <div className='flex items-center justify-end'>
+                            <button onClick={() => setOpenNavMenu(!openNavMenu)} className={`${openNavMenu ? 'active' : ''} block lg:hidden hamburger-menu p-3 me-0 z-3`}>
+                                <span className="line line-1"></span>
+                                <span className="line line-2"></span>
+                                <span className="line line-3"></span>
+                            </button>
+
                             {
                                 user ? (
                                     <>
@@ -91,7 +96,7 @@ const Header = () => {
                                             >
                                                 <img src={`${user && user.photoURL}`} className='w-14 h-14 object-cover rounded-full cursor-pointer' alt='User Profile Image' />
                                             </div>
-                                            <div className={`${openMenu ? 'opacity-100 visible' : 'opacity-0 invisible'} absolute right-0 top-[76px] w-[294px] h-auto text-sm before:content-[''] before:w-6 before:h-6  before:absolute before:-top-3 before:right-3.5 before:bg-white before:rotate-45 before:rounded-tl-sm before:border-t before:border-l before:border-dark-04 rounded-md bg-white border border-dark-04`}>
+                                            <div className={`${openMenu ? 'opacity-100 visible' : 'opacity-0 invisible'} absolute right-0 top-[76px] w-[294px] h-auto text-sm before:content-[''] before:w-6 before:h-6  before:absolute before:-top-3 before:right-3.5 before:bg-white before:rotate-45 before:rounded-tl-sm before:border-t before:border-l before:border-dark-04 rounded-md bg-white border border-dark-04 z-50`}>
                                                 <div className='pt-8 mb-6'>
                                                     <img src={`${user && user.photoURL}`} className='w-11 h-11 object-cover rounded-full mx-auto mb-2' alt='User Profile Pic' />
                                                     <h5 className='text-heading text-sm font-medium text-center'>{user && user.displayName}</h5>
@@ -121,7 +126,7 @@ const Header = () => {
                                         </div>
                                     </>
                                 ) : (
-                                    <div className='sign-in-button'>
+                                    <div className='sign-in-button hidden lg:block'>
                                         <Link to='/sign-in' className='button button-sm'>Sign In</Link>
                                     </div>
                                 )
