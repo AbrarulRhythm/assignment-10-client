@@ -59,7 +59,7 @@ p {
 }
 
 .button:disabled {
-  @apply shadow-btn-inner text-white/80 cursor-wait;
+  @apply shadow-btn-inner text-white/80 cursor-default;
 }
 
 /* [ Table ] */
