@@ -12,6 +12,8 @@ import FoodDetails from "../pages/FoodDetails/FoodDetails";
 import ManageMyFoods from "../pages/ManageMyFoods/ManageMyFoods";
 import UpdateFood from "../pages/UpdateFood/UpdateFood";
 import MyFoodRequests from "../pages/MyFoodRequests/MyFoodRequests";
+import AboutUs from "../pages/AboutUs/AboutUs";
+import News from "../pages/News/News";
 
 export const router = createBrowserRouter([
     {
@@ -22,6 +24,14 @@ export const router = createBrowserRouter([
             {
                 index: true,
                 Component: Home
+            },
+            {
+                path: 'about-us',
+                Component: AboutUs
+            },
+            {
+                path: 'news',
+                Component: News
             },
             {
                 path: 'register',

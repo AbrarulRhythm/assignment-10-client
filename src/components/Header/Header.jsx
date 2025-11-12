@@ -67,10 +67,10 @@ const Header = () => {
                                     <NavLink to='/foods'>Available Foods</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to='/b'>About Us</NavLink>
+                                    <NavLink to='/about-us'>About Us</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to='/c'>News</NavLink>
+                                    <NavLink to='/news'>News</NavLink>
                                 </li>
                             </ul>
                             {/* <Link to='/' className='button button-sm'>Sign In</Link> */}
