@@ -7,9 +7,12 @@ const FeaturedFoods = ({ featuredFoodsPromise }) => {
     return (
         <div className='flex flex-wrap -mx-3'>
             {
-                featuredFoods.map(food => {
+                featuredFoods.map((food, index) => {
+                    const duration = 400 + index * 100;
                     return (
                         <FoodCard
+                            data-aos="fade-up"
+                            data-aos-duration={duration}
                             key={food._id}
                             food={food}
                         ></FoodCard>

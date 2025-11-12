@@ -39,9 +39,10 @@ const PrimaryCard = () => {
             <div className='container'>
                 <div className='flex flex-wrap -mx-3 justify-center'>
                     {
-                        primaryCardData.map(data => {
+                        primaryCardData.map((data, index) => {
+                            const duration = 500 + index * 200;
                             return (
-                                <div key={data.id} className='w-full md:w-6/12 lg:w-4/12 px-3 mb-6'>
+                                <div data-aos="fade-up" data-aos-duration={duration} key={data.id} className='w-full md:w-6/12 lg:w-4/12 px-3 mb-6'>
                                     <div className='px-6 py-12 rounded-md border border-dark-04 bg-white hover:bg-card hover:border-card duration-300 text-center'>
                                         <img src={data.icon} className='mx-auto mb-4' alt='Card Icon' />
                                         <h3 className='text-2xl font-semibold text-heading mb-2'>{data.title}</h3>

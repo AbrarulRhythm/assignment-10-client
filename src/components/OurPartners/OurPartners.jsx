@@ -15,7 +15,7 @@ import logo12 from '../../assets/logo12.png';
 
 const OurPartners = () => {
     return (
-        <section className='border-y border-dark-04 py-10 md:py-[60px] lg:py-[74px]'>
+        <section data-aos="fade-up" data-aos-duration="800" className='border-y border-dark-04 py-10 md:py-[60px] lg:py-[74px]'>
             <h5 className='font-semibold mb-12 text-center'>SUPPORTED BY 900+ IMPACTFUL PARTNERS</h5>
 
             <Marquee pauseOnHover={true}>

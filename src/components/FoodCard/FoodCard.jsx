@@ -7,11 +7,11 @@ import FoodQuantity from '../../assets/FoodQuantity.png';
 import PickupLocation from '../../assets/PickupLocation.png';
 import ExpireDate from '../../assets/ExpireDate.png';
 
-const FoodCard = ({ food }) => {
+const FoodCard = ({ food, ...rest }) => {
     const { _id, foodStatus, donatorName, donatorImage, foodName, foodImage, foodQuantity, expireDate, pickupLocation, donatorNumber } = food;
 
     return (
-        <div className='w-full md:w-6/12 lg:w-4/12 px-3 mb-6'>
+        <div {...rest} className='w-full md:w-6/12 lg:w-4/12 px-3 mb-6'>
             <div className='card-wrapper bg-white border border-dark-04 h-full rounded-md group'>
                 <div className='food-image rounded-t-md overflow-hidden'>
                     <img src={foodImage} className='rounded-t-md w-full group-hover:scale-110 duration-300' alt='Food Card' />

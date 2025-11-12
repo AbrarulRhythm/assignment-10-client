@@ -59,12 +59,14 @@ const Home = () => {
             {/* Featured Foods */}
             <section className='py-14 lg:py-20 bg-card'>
                 <div className='container'>
-                    <SectionTitle
-                        title='Featured'
-                        strokeTitle='Foods'
-                        subTitle='Tasty Contributions'
-                        classes='text-center mb-10 lg:mb-12'
-                    ></SectionTitle>
+                    <div data-aos="fade-up" data-aos-duration="1000">
+                        <SectionTitle
+                            title='Featured'
+                            strokeTitle='Foods'
+                            subTitle='Tasty Contributions'
+                            classes='text-center mb-10 lg:mb-12'
+                        ></SectionTitle>
+                    </div>
 
                     <div className='featured-foods-wrap'>
                         <Suspense fallback={<p>Featured food is loaidng...</p>}>
@@ -73,7 +75,7 @@ const Home = () => {
                             ></FeaturedFoods>
                         </Suspense>
                     </div>
-                    <div className='mt-6 text-center'>
+                    <div data-aos="fade-up" data-aos-duration="1000" className='mt-6 text-center'>
                         <Link to='/foods' className='button'>Show All Foods</Link>
                     </div>
                 </div>
@@ -88,18 +90,23 @@ const Home = () => {
             {/* Blog Section */}
             <section className='py-14 lg:py-20'>
                 <div className='container'>
-                    <SectionTitle
-                        title='Our Recent'
-                        strokeTitle='Posts'
-                        subTitle='Form Out Blog'
-                        classes='text-center mb-10 lg:mb-12'
-                    ></SectionTitle>
+                    <div data-aos="fade-up" data-aos-duration="800">
+                        <SectionTitle
+                            title='Our Recent'
+                            strokeTitle='Posts'
+                            subTitle='Form Out Blog'
+                            classes='text-center mb-10 lg:mb-12'
+                        ></SectionTitle>
+                    </div>
 
                     <div className='flex flex-wrap -mx-3'>
                         {
-                            blogData.map((data) => {
+                            blogData.map((data, index) => {
+                                const duration = 500 + index * 200;
                                 return (
                                     <BlogCard
+                                        data-aos="fade-up"
+                                        data-aos-duration={duration}
                                         key={data.id}
                                         data={data}
                                     ></BlogCard>
@@ -107,7 +114,7 @@ const Home = () => {
                             })
                         }
                     </div>
-                    <div className='mt-6 text-center'>
+                    <div data-aos="fade-up" data-aos-duration="1000" className='mt-6 text-center'>
                         <Link to='/' className='button'>Read More Blogs</Link>
                     </div>
                 </div>

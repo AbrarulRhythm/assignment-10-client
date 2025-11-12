@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const BlogCard = ({ data }) => {
+const BlogCard = ({ data, ...rest }) => {
     const { image, title, category, publish_date, read, views, desc } = data;
 
     return (
-        <div className='w-full md:w-6/12 lg:w-4/12 px-3 mb-6'>
-            <div className='blog-card-wrapper'>
-                <div className='blog-image'>
-                    <img src={image} className='w-full rounded-t-md' alt='Blog Image' />
+        <div {...rest} className='w-full md:w-6/12 lg:w-4/12 px-3 mb-6'>
+            <div className='blog-card-wrapper h-full bg-white border border-dark-04 rounded-md group'>
+                <div className='blog-image rounded-t-md overflow-hidden'>
+                    <img src={image} className='w-full rounded-t-md group-hover:scale-110 duration-300' alt='Blog Image' />
                 </div>
-                <div className='p-6 bg-white border-t-0 border border-dark-04 rounded-b-md'>
+                <div className='p-6'>
                     <Link to='/' className='text-ps-primary hover:underline font-medium text-sm inline-block mb-3'>{category}</Link>
                     <h4 className='text-xl font-semibold text-heading hover:text-ps-primary duration-300 mb-4'>
                         <Link to=''>{title}</Link>
