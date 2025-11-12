@@ -48,6 +48,32 @@ const FoodRequestTable = ({ food, index, pageType }) => {
             })
     }
 
+    // Handle Food Request Delete
+    const handleDeleteRequest = (_id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/food-request/${_id}`)
+                    .then((data) => {
+                        if (data.data.deletedCount) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your food request has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+            }
+        });
+    }
+
     return (
         <tr key={food._id} >
             <td>{index + 1}</td>
@@ -100,7 +126,7 @@ const FoodRequestTable = ({ food, index, pageType }) => {
                                 <button onClick={() => handleFoodRequest(food._id, 'Rejected')} className='text-sm text-red-500 border border-red-500 font-medium px-4 py-1 rounded-sm hover:bg-red-500 hover:text-white duration-300 cursor-pointer action-btn' disabled={status === 'Accepted' || status === 'Rejected'}>Reject</button>
                             </>
                         ) : (
-                            <button className='text-sm text-red-500 border border-red-500 font-medium px-4 py-1 rounded-sm hover:bg-red-500 hover:text-white duration-300 cursor-pointer action-btn' disabled={status === 'Accepted' || status === 'Rejected'}>Delete</button>
+                            <button onClick={() => handleDeleteRequest(food._id)} className='text-sm text-red-500 border border-red-500 font-medium px-4 py-1 rounded-sm hover:bg-red-500 hover:text-white duration-300 cursor-pointer action-btn' disabled={status === 'Accepted' || status === 'Rejected'}>Delete</button>
                         )
                     }
                 </div>
