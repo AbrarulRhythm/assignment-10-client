@@ -52,19 +52,19 @@ const AddFood = () => {
 
         console.log(formattedDate);
 
-        // axiosSecure.post('/foods', newFoodData)
-        //     .then((data) => {
-        //         if (data.data.insertedId) {
-        //             reset(); // reset form
-        //             Swal.fire({
-        //                 position: "center",
-        //                 icon: "success",
-        //                 title: "Food added successfully!",
-        //                 showConfirmButton: false,
-        //                 timer: 2000
-        //             })
-        //         }
-        //     })
+        axiosSecure.post('/foods', newFoodData)
+            .then((data) => {
+                if (data.data.insertedId) {
+                    reset(); // reset form
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Food added successfully!",
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                }
+            })
     }
 
     return (
