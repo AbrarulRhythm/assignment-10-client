@@ -77,8 +77,8 @@ const FoodRequestTable = ({ food, index, pageType }) => {
     return (
         <tr key={food._id} >
             <td>{index + 1}</td>
-            <td className='max-w-[300px]'>
-                <div className='flex items-center gap-3'>
+            <td className='max-w-[300px] whitespace-nowrap lg:whitespace-normal'>
+                <div className='flex flex-col lg:flex-row items-start lg:items-center gap-3'>
                     <img src={foodData.foodImage} className='rounded-sm w-[116px] max-h-[95px] object-cover' alt='Food Image' />
                     <div>
                         <h5 className='text-base font-medium text-heading mb-0.5'>{foodData.foodName}</h5>
@@ -88,7 +88,7 @@ const FoodRequestTable = ({ food, index, pageType }) => {
                 </div>
             </td>
             <td>
-                <div className='flex items-center gap-3'>
+                <div className='flex flex-col lg:flex-row items-start lg:items-center gap-3'>
                     <img
                         src={
                             pageType === 'foodDetails'
@@ -117,7 +117,7 @@ const FoodRequestTable = ({ food, index, pageType }) => {
                             ? 'bg-red-300 text-red-800'
                             : 'bg-yellow-500 text-yellow-900'} text-[12px] font-medium px-3.5 py-1.5 rounded-full`}>{status}</span>
             </td>
-            <td className='text-end'>
+            <td className='text-end whitespace-nowrap'>
                 <div className=' space-x-3'>
                     {
                         pageType === 'foodDetails' ? (
