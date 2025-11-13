@@ -154,6 +154,10 @@ table td {
   @apply py-4
 }
 
+table {
+  @apply table w-full min-w-[900px]
+}
+
 /* [ Section Banner ] */
 /*================================================== */
 .section-banner ul li {

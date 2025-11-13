@@ -97,7 +97,7 @@ const ManageMyFoods = () => {
                                                             <tr key={food._id}>
                                                                 <td>{index + 1}</td>
                                                                 <td className='max-w-[300px]'>
-                                                                    <div className='flex items-center gap-3'>
+                                                                    <div className='flex flex-col lg:flex-row items-start lg:items-center gap-3'>
                                                                         <img src={food.foodImage} className='rounded-sm max-h-[95px] object-cover w-[116px]' alt='Food Image' />
                                                                         <div>
                                                                             <h5 className='text-base font-medium text-heading mb-0.5'>{food.foodName}</h5>
@@ -107,12 +107,12 @@ const ManageMyFoods = () => {
                                                                     </div>
                                                                 </td>
                                                                 <td className='max-w-[200px]'>
-                                                                    <div className='flex items-center gap-2'>
+                                                                    <div className='flex flex-col lg:flex-row items-start lg:items-center gap-2'>
                                                                         <img src={location} className='w-6' alt='Location icon' /> {food.pickupLocation}
                                                                     </div>
                                                                 </td>
-                                                                <td>
-                                                                    <div className='flex items-center gap-2'>
+                                                                <td className='whitespace-nowrap lg:whitespace-normal'>
+                                                                    <div className='flex flex-col lg:flex-row items-start lg:items-center gap-2'>
                                                                         <img src={quantity} className='w-6' alt='Quantity icon' /> <p><span>Quantity:</span> {food.foodQuantity}</p>
                                                                     </div>
                                                                 </td>
@@ -128,7 +128,7 @@ const ManageMyFoods = () => {
                                                                         {food.foodStatus}
                                                                     </span>
                                                                 </td>
-                                                                <td className='text-end'>
+                                                                <td className='text-end whitespace-nowrap'>
                                                                     <div className=' space-x-3'>
                                                                         <Link to={`/update-food/${food._id}`} className='text-sm text-yellow-500 border border-yellow-500 font-medium px-4 py-1 rounded-sm hover:bg-yellow-500 hover:text-white duration-300 cursor-pointer'>Update</Link>
                                                                         <button
