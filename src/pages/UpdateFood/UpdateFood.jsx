@@ -1,19 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import useAuth from '../../hooks/useAuth';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useLoaderData } from 'react-router';
 import Swal from 'sweetalert2';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const UpdateFood = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const food = useLoaderData();
+    const [startDate, setStartDate] = useState(new Date());
 
     const {
         register,
         handleSubmit,
         reset,
+        control,
         formState: { errors, isSubmitting },
     } = useForm();
 
@@ -39,7 +43,10 @@ const UpdateFood = () => {
 
     // Handle Add Food
     const handleAddFood = (foodData) => {
-        axiosSecure.patch(`/foods/${food._id}`, foodData)
+        const formattedExpDate = foodData.expireDate.toDateString();
+        const updateNewFoodData = { ...foodData, expireDate: formattedExpDate };
+
+        axiosSecure.patch(`/foods/${food._id}`, updateNewFoodData)
             .then((data) => {
                 if (data.data.modifiedCount) {
                     Swal.fire({
@@ -50,7 +57,7 @@ const UpdateFood = () => {
                         timer: 2000
                     })
                 }
-            })
+            });
     }
 
     return (
@@ -115,13 +122,23 @@ const UpdateFood = () => {
                                     <div className='w-full md:w-6/12 px-3'>
                                         <div className='mb-4'>
                                             <label htmlFor="name" className='text-sm mb-2 inline-block'>Expire Date</label>
-                                            <input type="date"
-                                                {...register('expireDate',
-                                                    {
-                                                        required: 'Expire Date is required'
-                                                    }
+                                            <Controller
+                                                name='expireDate'
+                                                control={control}
+                                                defaultValue={startDate}
+                                                rules={{
+                                                    required: 'Expire Date is required',
+                                                }}
+                                                render={({ field }) => (
+                                                    <DatePicker
+                                                        {...field}
+                                                        className={`${errors.expireDate ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`}
+                                                        selected={field.value} onChange={(date) => {
+                                                            setStartDate(date);
+                                                            field.onChange(date)
+                                                        }} />
                                                 )}
-                                                className={`${errors.expireDate ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='Enter food quantity' />
+                                            />
                                             <span className={`${errors.expireDate ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.expireDate && errors.expireDate.message}</span>
                                         </div>
                                     </div>

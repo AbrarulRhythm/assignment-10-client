@@ -1,15 +1,19 @@
-import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useEffect, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
 import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const AddFood = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
+    const [startDate, setStartDate] = useState(new Date());
     const {
         register,
         handleSubmit,
+        control,
         reset,
         formState: { errors, isSubmitting },
     } = useForm();
@@ -43,7 +47,8 @@ const AddFood = () => {
 
     // Handle Add Food
     const handleAddFood = (foodData) => {
-        const newFoodData = { ...foodData, created_at: [formattedDate, formattedTime] };
+        const formattedExpDate = foodData.expireDate.toDateString();
+        const newFoodData = { ...foodData, expireDate: formattedExpDate, created_at: [formattedDate, formattedTime] };
 
         axiosSecure.post('/foods', newFoodData)
             .then((data) => {
@@ -122,13 +127,23 @@ const AddFood = () => {
                                     <div className='w-full md:w-6/12 px-3'>
                                         <div className='mb-4'>
                                             <label htmlFor="name" className='text-sm mb-2 inline-block'>Expire Date</label>
-                                            <input type="date"
-                                                {...register('expireDate',
-                                                    {
-                                                        required: 'Expire Date is required'
-                                                    }
+                                            <Controller
+                                                name='expireDate'
+                                                control={control}
+                                                defaultValue={startDate}
+                                                rules={{
+                                                    required: 'Expire Date is required',
+                                                }}
+                                                render={({ field }) => (
+                                                    <DatePicker
+                                                        {...field}
+                                                        className={`${errors.expireDate ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`}
+                                                        selected={field.value} onChange={(date) => {
+                                                            setStartDate(date);
+                                                            field.onChange(date)
+                                                        }} />
                                                 )}
-                                                className={`${errors.expireDate ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='Enter food quantity' />
+                                            />
                                             <span className={`${errors.expireDate ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.expireDate && errors.expireDate.message}</span>
                                         </div>
                                     </div>

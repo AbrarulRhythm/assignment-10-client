@@ -134,6 +134,12 @@ p {
   @apply bg-gray-300 border-gray-300 text-gray-400 cursor-default
 }
 
+/* [ Date Picker ] */
+/*================================================== */
+.react-datepicker-wrapper {
+  @apply w-full
+}
+
 /* [ Table ] */
 /*================================================== */
 thead {
