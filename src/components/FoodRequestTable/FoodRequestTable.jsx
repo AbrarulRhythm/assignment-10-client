@@ -82,7 +82,7 @@ const FoodRequestTable = ({ food, index, pageType }) => {
                     <img src={foodData.foodImage} className='rounded-sm w-[116px] max-h-[95px] object-cover' alt='Food Image' />
                     <div>
                         <h5 className='text-base font-medium text-heading mb-0.5'>{foodData.foodName}</h5>
-                        <h6 className='text-[12px]'><span className='font-medium'>Create Date:</span> {foodData.created_at ? food.created_at[0] : 'data not found'}</h6>
+                        <h6 className='text-[12px]'><span className='font-medium'>Create Date:</span> {foodData.created_at && foodData.created_at.length > 0 ? foodData.created_at[0] : 'data not found'}</h6>
                         <h6 className='text-[12px]'><span className='font-medium'>Expire Date:</span> {foodData.expireDate}</h6>
                     </div>
                 </div>

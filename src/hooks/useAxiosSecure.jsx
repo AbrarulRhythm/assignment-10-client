@@ -5,7 +5,8 @@ import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
 const axiosInstance = axios.create({
-    baseURL: 'https://plate-share-api-server-sage.vercel.app/'
+    // baseURL: 'https://plate-share-api-server-sage.vercel.app/'
+    baseURL: 'http://localhost:3000/'
 })
 
 const useAxiosSecure = () => {
