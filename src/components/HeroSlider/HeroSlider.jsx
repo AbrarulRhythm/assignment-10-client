@@ -22,7 +22,7 @@ const HeroSlider = () => {
                                     <h1 className='text-3xl md:text-4xl lg:text-6xl 2xl:text-[64px] leading-[1.4] font-bold mb-2'>Your Leftovers Can Make a Difference</h1>
                                     <p className='text-sm md:text-base'>Join our mission to ensure that no one sleeps hungry. Together, we can turn compassion into action and build a world where every plate is full of hope, love, and kindness.</p>
                                     <div className='flex items-center gap-3 md:gap-4 lg:gap-6 mt-6'>
-                                        <Link to='/' className='button inline-block'>View All Foods</Link>
+                                        <Link to='/foods' className='button inline-block'>View All Foods</Link>
                                         <button className='w-12 lg:w-14 h-12 lg:h-14 text-base lg:text-lg bg-white rounded-full flex justify-center items-center cursor-pointer text-heading hover:bg-ps-primary hover:text-white duration-300'><FaPlay /></button>
                                     </div>
                                 </div>
