@@ -98,7 +98,7 @@ const ManageMyFoods = () => {
                                                                 <td>{index + 1}</td>
                                                                 <td className='max-w-[300px]'>
                                                                     <div className='flex items-center gap-3'>
-                                                                        <img src={food.foodImage} className='rounded-sm w-[116px]' alt='Food Image' />
+                                                                        <img src={food.foodImage} className='rounded-sm max-h-[95px] object-cover w-[116px]' alt='Food Image' />
                                                                         <div>
                                                                             <h5 className='text-base font-medium text-heading mb-0.5'>{food.foodName}</h5>
                                                                             <h6 className='text-[12px]'><span className='font-medium'>Create Date:</span> {food.created_at ? food.created_at[0] : 'data not found'}</h6>

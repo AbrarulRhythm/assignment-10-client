@@ -14,7 +14,7 @@ const FoodCard = ({ food, ...rest }) => {
         <div {...rest} className='w-full md:w-6/12 lg:w-4/12 px-3 mb-6'>
             <div className='card-wrapper bg-white border border-dark-04 h-full rounded-md group'>
                 <div className='food-image rounded-t-md overflow-hidden'>
-                    <img src={foodImage} className='rounded-t-md w-full group-hover:scale-110 duration-300' alt='Food Card' />
+                    <img src={foodImage} className='rounded-t-md w-full group-hover:scale-110 duration-300 max-h-[300px] object-cover' alt='Food Card' />
                 </div>
                 <div className='p-6'>
                     <div className='flex justify-between items-center mb-6 gap-4'>
