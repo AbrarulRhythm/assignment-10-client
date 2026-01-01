@@ -1,17 +1,17 @@
 import React from 'react';
 import Marquee from 'react-fast-marquee';
-import logo01 from '../../assets/logo1.png';
-import logo02 from '../../assets/logo2.png';
-import logo03 from '../../assets/logo3.png';
-import logo04 from '../../assets/logo4.png';
-import logo05 from '../../assets/logo05.png';
-import logo06 from '../../assets/logo06.png';
-import logo07 from '../../assets/logo07.png';
-import logo08 from '../../assets/logo08.png';
-import logo09 from '../../assets/logo09.png';
-import logo10 from '../../assets/logo10.png';
-import logo11 from '../../assets/logo11.png';
-import logo12 from '../../assets/logo12.png';
+import logo01 from '../../../assets/logo1.png';
+import logo02 from '../../../assets/logo2.png';
+import logo03 from '../../../assets/logo3.png';
+import logo04 from '../../../assets/logo4.png';
+import logo05 from '../../../assets/logo05.png';
+import logo06 from '../../../assets/logo06.png';
+import logo07 from '../../../assets/logo07.png';
+import logo08 from '../../../assets/logo08.png';
+import logo09 from '../../../assets/logo09.png';
+import logo10 from '../../../assets/logo10.png';
+import logo11 from '../../../assets/logo11.png';
+import logo12 from '../../../assets/logo12.png';
 
 const OurPartners = () => {
     return (

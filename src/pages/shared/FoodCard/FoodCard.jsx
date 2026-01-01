@@ -1,11 +1,9 @@
 import React from 'react';
 import { TbListDetails } from 'react-icons/tb';
 import { Link } from 'react-router';
-
-// Image
-import FoodQuantity from '../../assets/FoodQuantity.png';
-import PickupLocation from '../../assets/PickupLocation.png';
-import ExpireDate from '../../assets/ExpireDate.png';
+import FoodQuantity from '../../../assets/FoodQuantity.png';
+import PickupLocation from '../../../assets/PickupLocation.png';
+import ExpireDate from '../../../assets/ExpireDate.png';
 
 const FoodCard = ({ food, ...rest }) => {
     const { _id, foodStatus, donatorName, donatorImage, foodName, foodImage, foodQuantity, expireDate, pickupLocation, donatorNumber } = food;

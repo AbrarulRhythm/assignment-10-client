@@ -1,9 +1,9 @@
 import React from 'react';
 
 // Image
-import icon01 from '../../assets/primaty-icon-01.png';
-import icon02 from '../../assets/primaty-icon-02.png';
-import icon03 from '../../assets/primaty-icon-03.png';
+import icon01 from '../../../assets/primaty-icon-01.png';
+import icon02 from '../../../assets/primaty-icon-02.png';
+import icon03 from '../../../assets/primaty-icon-03.png';
 import { Link } from 'react-router';
 
 const primaryCardData = [

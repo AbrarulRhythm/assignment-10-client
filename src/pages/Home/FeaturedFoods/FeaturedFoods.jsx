@@ -1,5 +1,5 @@
 import React, { use } from 'react';
-import FoodCard from '../FoodCard/FoodCard';
+import FoodCard from '../../shared/FoodCard/FoodCard';
 
 const FeaturedFoods = ({ featuredFoodsPromise }) => {
     const featuredFoods = use(featuredFoodsPromise);

@@ -1,9 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import HomeLayout from "../layout/HomeLayout";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
-import Home from "../pages/Home/Home";
-import Register from "../pages/Register/Register";
-import SignIn from "../pages/SignIn/SignIn";
 import AddFood from "../pages/AddFood/AddFood";
 import AvailableFoods from "../pages/AvailableFoods/AvailableFoods";
 import { axiosInstance } from '../hooks/useAxios';
@@ -14,6 +11,9 @@ import UpdateFood from "../pages/UpdateFood/UpdateFood";
 import MyFoodRequests from "../pages/MyFoodRequests/MyFoodRequests";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import News from "../pages/News/News";
+import Home from "../pages/Home/Home/Home";
+import Register from "../pages/Auth/Register/Register";
+import SignIn from "../pages/Auth/SignIn/SignIn";
 
 export const router = createBrowserRouter([
     {
@@ -59,7 +59,7 @@ export const router = createBrowserRouter([
                     const data = await axiosInstance.get(`/foods/${params.id}`);
                     return data.data;
                 },
-                element: <PrivateRoute><FoodDetails></FoodDetails></PrivateRoute>
+                Component: FoodDetails
             },
             {
                 path: 'manage-my-foods',

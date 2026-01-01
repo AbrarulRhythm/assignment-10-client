@@ -1,14 +1,11 @@
 import React from 'react';
-
-// Image
-// import heroBG from '../../assets/hero-bg-01.png';
-import icon01 from '../../assets/icon01.png';
+import icon01 from '../../../assets/icon01.png';
 import { Link } from 'react-router';
 import { FaPlay } from 'react-icons/fa';
 
 const HeroSlider = () => {
     return (
-        <section className='hero-section pt-[91px] lg:pt-[110px]'>
+        <section className='hero-section mt-[91px] lg:mt-[110px]'>
             <div className='px-5 md:px-6 lg:px-8 2xl:px-10'>
                 <div className='hero py-12 md:py-14 lg:py-[158px] rounded-2xl text-white'>
                     <div className='container'>

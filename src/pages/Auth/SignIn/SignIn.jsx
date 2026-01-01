@@ -4,7 +4,7 @@ import { FaEye } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { IoEyeOff } from 'react-icons/io5';
 import { Link, useLocation, useNavigate } from 'react-router';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../../../hooks/useAuth';
 import { toast } from 'react-toastify';
 
 const SignIn = () => {

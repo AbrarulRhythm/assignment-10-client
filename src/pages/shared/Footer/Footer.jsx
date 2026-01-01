@@ -6,9 +6,7 @@ import { FaFacebookF, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { HiOutlineChevronDoubleRight } from 'react-icons/hi';
 import { Link } from 'react-router';
-
-// Image
-import logoWhite from '../../assets/logo-white.png';
+import logoWhite from '../../../assets/logo-white.png';
 
 const Footer = () => {
     return (

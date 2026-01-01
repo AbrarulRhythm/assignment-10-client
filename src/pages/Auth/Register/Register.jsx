@@ -3,10 +3,10 @@ import { FaEye } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { IoEyeOff } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../../../hooks/useAuth';
 import { useForm } from "react-hook-form"
 import { toast } from 'react-toastify';
-import useAxios from '../../hooks/useAxios';
+import useAxios from '../../../hooks/useAxios';
 
 const Register = () => {
     const { setUser, createUser, updateUserProfile, signInWithGoogle } = useAuth();

@@ -1,7 +1,7 @@
 import React from 'react';
 import SectionBanner from '../../components/SectionBanner/SectionBanner';
 import { useLoaderData } from 'react-router';
-import FoodCard from '../../components/FoodCard/FoodCard';
+import FoodCard from '../shared/FoodCard/FoodCard';
 
 const AvailableFoods = () => {
     const foods = useLoaderData();

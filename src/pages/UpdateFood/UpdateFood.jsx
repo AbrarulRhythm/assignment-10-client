@@ -43,6 +43,7 @@ const UpdateFood = () => {
 
     // Handle Add Food
     const handleAddFood = (foodData) => {
+        const convertedFoodQuantity = parseInt(foodData.foodQuantity);
         let formattedExpDate = '';
         if (foodData.expireDate instanceof Date) {
             formattedExpDate = foodData.expireDate.toDateString();
@@ -50,7 +51,7 @@ const UpdateFood = () => {
         else {
             formattedExpDate = foodData.expireDate;
         }
-        const updateNewFoodData = { ...foodData, expireDate: formattedExpDate };
+        const updateNewFoodData = { ...foodData, expireDate: formattedExpDate, foodQuantity: convertedFoodQuantity };
 
         axiosSecure.patch(`/foods/${food._id}`, updateNewFoodData)
             .then((data) => {

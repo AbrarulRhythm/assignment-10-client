@@ -47,10 +47,9 @@ const AddFood = () => {
 
     // Handle Add Food
     const handleAddFood = (foodData) => {
+        const convertedFoodQuantity = parseInt(foodData.foodQuantity);
         const formattedExpDate = foodData.expireDate.toDateString();
-        const newFoodData = { ...foodData, expireDate: formattedExpDate, created_at: [formattedDate, formattedTime] };
-
-        console.log(formattedDate);
+        const newFoodData = { ...foodData, foodQuantity: convertedFoodQuantity, expireDate: formattedExpDate, created_at: [formattedDate, formattedTime] };
 
         axiosSecure.post('/foods', newFoodData)
             .then((data) => {

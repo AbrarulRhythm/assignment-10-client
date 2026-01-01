@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaChevronRight } from 'react-icons/fa';
 import { Link } from 'react-router';
-import image01 from '../../assets/image01.png';
+import image01 from '../../../assets/image01.png';
 
 const CommunityImpact = () => {
     return (

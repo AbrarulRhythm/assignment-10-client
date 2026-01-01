@@ -1,14 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router';
-import { FaBars } from 'react-icons/fa';
-import useAuth from '../../hooks/useAuth';
+// import { FaBars } from 'react-icons/fa';
+import useAuth from '../../../hooks/useAuth';
 import { MdAdd } from 'react-icons/md';
 import { BsBoxes } from 'react-icons/bs';
 import { IoFastFoodOutline } from 'react-icons/io5';
 import { PiSignOutBold } from 'react-icons/pi';
-
-// Image
-import logoDark from '../../assets/logo-dark.png';
+import logoDark from '../../../assets/logo-dark.png';
 import { toast } from 'react-toastify';
 
 const Header = () => {
@@ -44,7 +42,7 @@ const Header = () => {
 
     return (
         <div className='container'>
-            <nav className='priamry-menu py-2.5 relative'>
+            <nav className='priamry-menu relative'>
                 <div className='flex flex-wrap -mx-3 items-center justify-between'>
                     <div className='w-6/12 lg:w-3/12 px-3'>
                         {/* Header Logo */}

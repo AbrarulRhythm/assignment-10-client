@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../components/Header/Header';
 import { Outlet, useLocation } from 'react-router';
-import Footer from '../components/Footer/Footer';
 import LoadingPage from '../pages/LoadingPage/LoadingPage';
+import Header from '../pages/shared/Header/Header';
+import Footer from '../pages/shared/Footer/Footer';
 
 const HomeLayout = () => {
     const [loading, setloading] = useState(true);
     const [fadeOut, setFadeOut] = useState(false);
-    const [scroll, setScroll] = useState(0);
     const location = useLocation();
+    const [navStickyMovedUp, setNavStickyMovedUp] = useState(false);
+    const [stickyNavTransition, setStickyNavTransition] = useState(false);
+    const [isSticky, setIsSticky] = useState(false);
 
+    // Preloader
     useEffect(() => {
         const timer = setTimeout(() => {
             setFadeOut(true);
@@ -20,26 +23,60 @@ const HomeLayout = () => {
     }, []);
 
     useEffect(() => {
-        setloading(true);
-        setFadeOut(false);
-        const timer = setTimeout(() => {
-            setFadeOut(true);
-            setTimeout(() => setloading(false), 500);
-        }, 2000);
-
-        return () => clearTimeout(timer);
-    }, [location.pathname]);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setScroll(window.scrollY > 0);
+        const startLoading = () => {
+            setloading(true);
+            setFadeOut(false);
         };
 
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
+        startLoading();
+
+        const handleLoad = () => {
+            setFadeOut(true);
+            setTimeout(() => setloading(false), 500);
+        };
+
+
+        if (document.readyState === 'complete') {
+            const timer = setTimeout(handleLoad, 1000);
+            return () => clearTimeout(timer);
+        } else {
+            window.addEventListener('load', handleLoad);
+            return () => window.removeEventListener('load', handleLoad);
         }
-    });
+    }, [location.pathname]);
+
+    // Sticky Navbar
+    useEffect(() => {
+        const handleScroll = () => {
+            const scroll = window.scrollY;
+
+            if (scroll >= 153) {
+                setNavStickyMovedUp(true);
+            }
+            else {
+                setNavStickyMovedUp(false);
+            }
+
+            // Apply Transition
+            if (scroll >= 250) {
+                setStickyNavTransition(true)
+            }
+            else {
+                setStickyNavTransition(false);
+            }
+
+            // Sticky On
+            if (scroll >= 500) {
+                setIsSticky(true);
+            }
+            else {
+                setIsSticky(false);
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return (
         <>
@@ -52,7 +89,11 @@ const HomeLayout = () => {
                     <>
                         <div className='main-wrapper'>
                             {/* Header */}
-                            <header className={`${scroll ? 'border-b border-dark-04 shadow' : ''} fixed top-0 left-0 right-0 bg-white z-50`}>
+                            <header className={`
+                                ${navStickyMovedUp ? 'fixed top-0 lg:top-0 -mt-[110px]' : 'absolute'}
+                                ${stickyNavTransition ? 'duration-500' : ''}
+                                ${isSticky ? 'mt-0 duration-500 shadow-md bg-white py-0' : 'py-2.5'}
+                                -top-[91px] lg:-top-[110px] left-0 right-0 bg-white z-50`}>
                                 <Header></Header>
                             </header>
                             {/* Header End */}

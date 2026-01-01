@@ -1,14 +1,13 @@
 import React, { Suspense } from 'react';
-import HeroSlider from '../../components/HeroSlider/HeroSlider';
-import PrimaryCard from '../../components/PrimaryCard/PrimaryCard';
-import SectionTitle from '../../components/SectionTitle/SectionTitle';
 import { Link } from 'react-router';
-import CommunityImpact from '../../components/CommunityImpact/CommunityImpact';
-import OurPartners from '../../components/OurPartners/OurPartners';
-import BlogCard from '../../components/BlogCard/BlogCard';
-import useAxios from '../../hooks/useAxios';
-import FeaturedFoods from '../../components/FeaturedFoods/FeaturedFoods';
-import LoadingPage from '../LoadingPage/LoadingPage';
+import BlogCard from '../../shared/BlogCard/BlogCard';
+import useAxios from '../../../hooks/useAxios';
+import CommunityImpact from '../CommunityImpact/CommunityImpact';
+import OurPartners from '../../shared/OurPartners/OurPartners';
+import SectionTitle from '../../../components/SectionTitle/SectionTitle';
+import PrimaryCard from '../../shared/PrimaryCard/PrimaryCard';
+import HeroSlider from '../HeroSlider/HeroSlider';
+import FeaturedFoods from '../FeaturedFoods/FeaturedFoods';
 
 const blogData = [
     {
