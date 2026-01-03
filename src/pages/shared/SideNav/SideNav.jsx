@@ -1,9 +1,10 @@
 import React from 'react';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import { RxDashboard } from "react-icons/rx";
 import { TbArrowBarToLeft } from 'react-icons/tb';
 import logo from '../../../assets/logo-dark.png';
 import logoIcon from '../../../assets/logoIcon.png';
+import { BsPlusSquare } from "react-icons/bs";
 
 const SideNav = ({ sideMenuOpen, setSideMenuOpen }) => {
 
@@ -11,10 +12,14 @@ const SideNav = ({ sideMenuOpen, setSideMenuOpen }) => {
         <div className='relative h-full'>
             <div className='px-6 py-6 duration-300'>
                 {sideMenuOpen ? (
-                    <img src={logoIcon} alt="" />
+                    <Link to='/'>
+                        <img src={logoIcon} alt="Logo" />
+                    </Link>
                 ) : (
                     <div className='duration-300'>
-                        <img src={logo} alt="" />
+                        <Link to='/'>
+                            <img src={logo} alt="Logo" />
+                        </Link>
                     </div>
                 )}
             </div>
@@ -25,6 +30,12 @@ const SideNav = ({ sideMenuOpen, setSideMenuOpen }) => {
                         <NavLink to='/dashboard/overview' className={`${sideMenuOpen && 'lg:justify-center'} flex items-center`}>
                             <div><RxDashboard className='text-[19px]' /></div>
                             <span className={`${sideMenuOpen && 'lg:hidden'} text-sm pl-2`}>Dashboard</span>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/dashboard/add-food' className={`${sideMenuOpen && 'lg:justify-center'} flex items-center`}>
+                            <div><BsPlusSquare className='text-[19px]' /></div>
+                            <span className={`${sideMenuOpen && 'lg:hidden'} text-sm pl-2`}>Add Food</span>
                         </NavLink>
                     </li>
                 </ul>

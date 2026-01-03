@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import HomeLayout from "../layout/HomeLayout";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
-import AddFood from "../pages/AddFood/AddFood";
 import AvailableFoods from "../pages/AvailableFoods/AvailableFoods";
 import { axiosInstance } from '../hooks/useAxios';
 import PrivateRoute from "../context/PrivateRoute";
@@ -16,6 +15,7 @@ import Register from "../pages/Auth/Register/Register";
 import SignIn from "../pages/Auth/SignIn/SignIn";
 import DashboardLayout from "../layout/DashboardLayout";
 import DashboardOverview from "../pages/Dashboard/DashboardOverview/DashboardOverview";
+import AddFood from "../pages/Dashboard/AddFood/AddFood";
 
 export const router = createBrowserRouter([
     {
@@ -42,10 +42,6 @@ export const router = createBrowserRouter([
             {
                 path: 'sign-in',
                 Component: SignIn
-            },
-            {
-                path: 'add-food',
-                element: <PrivateRoute><AddFood></AddFood></PrivateRoute>
             },
             {
                 path: 'foods',
@@ -88,7 +84,11 @@ export const router = createBrowserRouter([
             {
                 path: 'overview',
                 Component: DashboardOverview
-            }
+            },
+            {
+                path: 'add-food',
+                Component: AddFood
+            },
         ]
     }
 ]);

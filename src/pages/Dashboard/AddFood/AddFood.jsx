@@ -1,0 +1,262 @@
+import React, { useEffect, useState } from 'react';
+import DashboardTitle from '../../../components/DashboardTitle/DashboardTitle';
+import useAuth from '../../../hooks/useAuth';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
+import { Controller, useForm } from 'react-hook-form';
+import DatePicker from "react-datepicker";
+import { toast } from 'react-toastify';
+import axios from 'axios';
+
+const AddFood = () => {
+    const { user } = useAuth();
+    const axiosSecure = useAxiosSecure();
+    const [startDate, setStartDate] = useState(new Date());
+    const {
+        register,
+        handleSubmit,
+        control,
+        reset,
+        formState: { errors, isSubmitting },
+    } = useForm();
+
+    useEffect(() => {
+        if (user) {
+            reset({
+                foodStatus: 'Available',
+                donatorName: user?.displayName || '',
+                donatorEmail: user?.email || '',
+                donatorImage: user?.photoURL || '',
+            })
+        }
+    }, [user, reset]);
+
+    // Handle Add Food
+    const handleAddFood = async (foodData) => {
+        try {
+            // Store the image and get the photo url
+            const image = foodData.foodImage[0];
+            const formData = new FormData();
+            formData.append('image', image);
+            const imageAPI_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host_key}`;
+
+            const imageRes = await axios.post(imageAPI_URL, formData);
+            const photoURL = imageRes.data.data.url; // Image live url
+
+            const convertedFoodQuantity = parseInt(foodData.foodQuantity);
+            const newFoodData = { ...foodData, foodQuantity: convertedFoodQuantity, foodImage: photoURL };
+
+            const res = await axiosSecure.post('/foods', newFoodData)
+
+            if (res.data.insertedId) {
+                reset(); // reset form
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Food added successfully!",
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            }
+            else {
+                toast.error(res.data.error);
+            }
+        }
+        catch (error) {
+            toast.error(error.message)
+        }
+    }
+
+    return (
+        <>
+            <title>Add Food</title>
+
+            <DashboardTitle
+                title='Add Food'
+            ></DashboardTitle>
+
+            <div className='bg-transparent lg:bg-white lg:px-20 lg:py-14 rounded-md'>
+                <form onSubmit={handleSubmit(handleAddFood)}>
+                    <div className='flex flex-wrap -mx-3'>
+                        {/* Food Name */}
+                        <div className='w-full md:w-6/12 px-3'>
+                            <div className='mb-4'>
+                                <label htmlFor="name" className='text-sm mb-2 inline-block'>Food Name</label>
+                                <input type="text"
+                                    {...register('foodName',
+                                        {
+                                            required: 'Name is required',
+                                            minLength: { value: 3, message: 'Name must be at least 3 characters long.' },
+                                            maxLength: { value: 50, message: 'Name cannot be longer than 50 characters.' }
+                                        }
+                                    )}
+                                    className={`${errors.foodName ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='Homemade Vegetable Soup' />
+                                <span className={`${errors.foodName ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.foodName && errors.foodName.message}</span>
+                            </div>
+                        </div>
+                        {/* Food Image */}
+                        <div className='w-full md:w-6/12 px-3'>
+                            <div className='mb-4'>
+                                <label htmlFor="name" className='text-sm mb-2 inline-block'>Food Image</label>
+                                <input type="file"
+                                    {...register('foodImage',
+                                        {
+                                            required: 'Food name is required'
+                                        }
+                                    )}
+                                    className={`${errors.foodImage ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='https://your-image-url.com' />
+                                <span className={`${errors.foodImage ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.foodImage && errors.foodImage.message}</span>
+                            </div>
+                        </div>
+                        {/* Food Quantity  */}
+                        <div className='w-full md:w-6/12 px-3'>
+                            <div className='mb-4'>
+                                <label htmlFor="name" className='text-sm mb-2 inline-block'>Food Quantity</label>
+                                <input type="number"
+                                    {...register('foodQuantity',
+                                        {
+                                            required: 'Food food quantity is required'
+                                        }
+                                    )}
+                                    className={`${errors.foodQuantity ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='Enter food quantity' />
+                                <span className={`${errors.foodQuantity ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.foodQuantity && errors.foodQuantity.message}</span>
+                            </div>
+                        </div>
+                        {/* Expire Date  */}
+                        <div className='w-full md:w-6/12 px-3'>
+                            <div className='mb-4'>
+                                <label htmlFor="name" className='text-sm mb-2 inline-block'>Expire Date</label>
+                                <Controller
+                                    name='expireDate'
+                                    control={control}
+                                    defaultValue={startDate}
+                                    rules={{
+                                        required: 'Expire Date is required',
+                                    }}
+                                    render={({ field }) => (
+                                        <DatePicker
+                                            {...field}
+                                            className={`${errors.expireDate ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`}
+                                            selected={field.value} onChange={(date) => {
+                                                setStartDate(date);
+                                                field.onChange(date)
+                                            }} />
+                                    )}
+                                />
+                                <span className={`${errors.expireDate ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.expireDate && errors.expireDate.message}</span>
+                            </div>
+                        </div>
+                        {/* Pickup Location  */}
+                        <div className='w-full md:w-12/12 px-3'>
+                            <div className='mb-4'>
+                                <label htmlFor="name" className='text-sm mb-2 inline-block'>Food Status</label>
+                                <input type="text"
+                                    {...register('foodStatus',
+                                        {
+                                            required: 'Food Status is required'
+                                        }
+                                    )}
+                                    className={`${errors.foodStatus ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-green-400'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='Food Status' readOnly />
+                                <span className={`${errors.foodStatus ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.foodStatus && errors.foodStatus.message}</span>
+                            </div>
+                        </div>
+                        {/* Pickup Location  */}
+                        <div className='w-full md:w-12/12 px-3'>
+                            <div className='mb-4'>
+                                <label htmlFor="name" className='text-sm mb-2 inline-block'>Pickup Location</label>
+                                <input type="text"
+                                    {...register('pickupLocation',
+                                        {
+                                            required: 'Pickup Location is required'
+                                        }
+                                    )}
+                                    className={`${errors.pickupLocation ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='123 Maple Street, Springfield, IL, 62701, USA' />
+                                <span className={`${errors.pickupLocation ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.pickupLocation && errors.pickupLocation.message}</span>
+                            </div>
+                        </div>
+                        {/* About Food  */}
+                        <div className='w-full md:w-12/12 px-3'>
+                            <div className='mb-4'>
+                                <label htmlFor="name" className='text-sm mb-2 inline-block'>About Food</label>
+                                <textarea {...register('aboutFood', {
+                                    required: 'Food About is required'
+                                })} cols="30" rows='4' className={`${errors.aboutFood ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='About Food'></textarea>
+                                <span className={`${errors.aboutFood ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.aboutFood && errors.aboutFood.message}</span>
+                            </div>
+                        </div>
+                        {/* Additional Notes  */}
+                        <div className='w-full md:w-12/12 px-3'>
+                            <div className='mb-4'>
+                                <label htmlFor="name" className='text-sm mb-2 inline-block'>Additional Notes (Optional)</label>
+                                <textarea {...register('additionalNotes')} cols="30" rows='4' className='w-full px-6 py-3.5 border  rounded-md focus:outline-0 border-dark-04 focus:border-ps-primary text-body' placeholder='Additional Notes'></textarea>
+                            </div>
+                        </div>
+                        <div className='w-full px-3'>
+                            <h5 className='text-sm relative font-semibold mb-4'>Donator's Information</h5>
+                        </div>
+                        {/* Donator Name */}
+                        <div className='w-full md:w-6/12 px-3'>
+                            <div className='mb-4'>
+                                <label htmlFor="name" className='text-sm mb-2 inline-block'>Donator's Name</label>
+                                <input type="text"
+                                    {...register('donatorName',
+                                        {
+                                            required: "Donator's Name is required"
+                                        }
+                                    )}
+                                    className={`${errors.donatorName ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='Oliver Noha' readOnly />
+                                <span className={`${errors.donatorName ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.donatorName && errors.donatorName.message}</span>
+                            </div>
+                        </div>
+                        {/* Donator Email */}
+                        <div className='w-full md:w-6/12 px-3'>
+                            <div className='mb-4'>
+                                <label htmlFor="name" className='text-sm mb-2 inline-block'>Donator's Email</label>
+                                <input type="email"
+                                    {...register('donatorEmail',
+                                        {
+                                            required: "Donator's Email is required",
+                                            pattern: {
+                                                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                                message: "Please enter a valid email address (must include @ and .com)",
+                                            }
+                                        }
+                                    )}
+                                    className={`${errors.donatorEmail ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='olivernoha@gmail.com' readOnly />
+                                <span className={`${errors.donatorEmail ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.donatorEmail && errors.donatorEmail.message}</span>
+                            </div>
+                        </div>
+                        {/* Donator Number  */}
+                        <div className='w-full md:w-12/12 px-3'>
+                            <div className='mb-4'>
+                                <label htmlFor="number" className='text-sm mb-2 inline-block'>Donator's Number (Optional)</label>
+                                <input type="number"
+                                    {...register('donatorNumber')}
+                                    className='w-full px-6 py-3.5 border  rounded-md focus:outline-0 border-dark-04 focus:border-ps-primary text-body' placeholder='(555) 987-1234' />
+                            </div>
+                        </div>
+                        {/* Donator Image */}
+                        <div className='w-full md:w-12/12 px-3'>
+                            <div className='mb-4'>
+                                <label htmlFor="name" className='text-sm mb-2 inline-block'>Donator's Image-URL</label>
+                                <input type="text"
+                                    {...register('donatorImage',
+                                        {
+                                            required: "Donator's Image is required"
+                                        }
+                                    )}
+                                    className={`${errors.donatorImage ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='Oliver Noha' readOnly />
+                                <span className={`${errors.donatorImage ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.donatorImage && errors.donatorImage.message}</span>
+                            </div>
+                        </div>
+                        <div className='w-full md:w-auto px-3'>
+                            <button className='button mt-4 l-r-b' disabled={isSubmitting}>{isSubmitting ? <div className='flex items-center justify-center gap-2'><span className='loading loading-spinner loading-sm'></span> Add Food</div> : 'Add Food'}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </>
+    );
+};
+
+export default AddFood;
