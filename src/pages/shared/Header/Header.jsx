@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router';
-// import { FaBars } from 'react-icons/fa';
 import useAuth from '../../../hooks/useAuth';
 import { MdAdd } from 'react-icons/md';
 import { BsBoxes } from 'react-icons/bs';
@@ -8,6 +7,7 @@ import { IoFastFoodOutline } from 'react-icons/io5';
 import { PiSignOutBold } from 'react-icons/pi';
 import logoDark from '../../../assets/logo-dark.png';
 import { toast } from 'react-toastify';
+import { RxDashboard } from "react-icons/rx";
 
 const Header = () => {
     const { user, signOutUser } = useAuth();
@@ -59,7 +59,7 @@ const Header = () => {
                                     <NavLink to='/'>Home</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to='/foods'>Available Foods</NavLink>
+                                    <NavLink to='/foods'>Foods</NavLink>
                                 </li>
                                 <li>
                                     <NavLink to='/about-us'>About Us</NavLink>
@@ -100,6 +100,11 @@ const Header = () => {
                                                     <h5 className='text-heading text-sm font-medium text-center'>{user && user.displayName}</h5>
                                                 </div>
                                                 <ul>
+                                                    <li>
+                                                        <Link to='/dashboard/overview' className='flex items-center px-4 py-2 gap-2 font-medium hover:bg-gray-100'>
+                                                            <RxDashboard className='text-lg' /> Dashboard
+                                                        </Link>
+                                                    </li>
                                                     <li>
                                                         <Link to='/add-food' className='flex items-center px-4 py-2 gap-2 font-medium hover:bg-gray-100'>
                                                             <MdAdd className='text-lg' /> Add Food

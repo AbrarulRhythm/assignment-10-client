@@ -35,6 +35,7 @@ const UpdateFood = () => {
                 foodQuantity: food.foodQuantity,
                 expireDate: food.expireDate,
                 pickupLocation: food.pickupLocation,
+                aboutFood: food.aboutFood,
                 additionalNotes: food.additionalNotes,
                 donatorNumber: food.donatorNumber
             })
@@ -180,6 +181,16 @@ const UpdateFood = () => {
                                                 )}
                                                 className={`${errors.pickupLocation ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='123 Maple Street, Springfield, IL, 62701, USA' />
                                             <span className={`${errors.pickupLocation ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.pickupLocation && errors.pickupLocation.message}</span>
+                                        </div>
+                                    </div>
+                                    {/* About Food  */}
+                                    <div className='w-full md:w-12/12 px-3'>
+                                        <div className='mb-4'>
+                                            <label htmlFor="name" className='text-sm mb-2 inline-block'>About Food</label>
+                                            <textarea {...register('aboutFood', {
+                                                required: 'Food About is required'
+                                            })} cols="30" rows='4' className={`${errors.aboutFood ? 'border-red-500 focus:border-red-500 text-red-500' : 'border-dark-04 focus:border-ps-primary text-body'} w-full px-6 py-3.5 border  rounded-md focus:outline-0`} placeholder='About Food'></textarea>
+                                            <span className={`${errors.aboutFood ? 'block mt-1' : 'hidden'} text-[14px] text-red-500`}>{errors.aboutFood && errors.aboutFood.message}</span>
                                         </div>
                                     </div>
                                     {/* Additional Notes  */}

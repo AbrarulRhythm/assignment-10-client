@@ -2,6 +2,8 @@ import React from 'react';
 import SectionBanner from '../../components/SectionBanner/SectionBanner';
 import { useLoaderData } from 'react-router';
 import FoodCard from '../shared/FoodCard/FoodCard';
+import EmptyState from '../../components/EmptyState/EmptyState';
+import noFood from '../../assets/no-food.png';
 
 const AvailableFoods = () => {
     const foods = useLoaderData();
@@ -18,16 +20,27 @@ const AvailableFoods = () => {
             <section className='pt-14 pb-8 lg:pt-20 lg:pb-14'>
                 <div className='container'>
                     <div className='flex flex-wrap -mx-3'>
-                        {
-                            foods.map(food => {
-                                return (
-                                    <FoodCard
-                                        key={food._id}
-                                        food={food}
-                                    ></FoodCard>
-                                )
-                            })
-                        }
+                        {!foods || foods.length === 0 ? (
+                            <div className='w-full px-3'>
+                                <EmptyState
+                                    icon={noFood}
+                                    message='Oops! We couldn’t locate that food item.'
+                                ></EmptyState>
+                            </div>
+                        ) : (
+                            <>
+                                {
+                                    foods.map(food => {
+                                        return (
+                                            <FoodCard
+                                                key={food._id}
+                                                food={food}
+                                            ></FoodCard>
+                                        )
+                                    })
+                                }
+                            </>
+                        )}
                     </div>
                 </div>
             </section>

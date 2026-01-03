@@ -13,9 +13,10 @@ import food_id from '../../assets/food_id.png';
 import food_quantity from '../../assets/food_quantity_lg.png';
 import location from '../../assets/location_lg.png';
 import exp_date from '../../assets/exp_date_lg.png';
+import moment from 'moment';
 
 const FoodDetails = () => {
-    const { _id, additionalNotes, foodStatus, donatorName, donatorImage, foodName, foodImage, foodQuantity, expireDate, created_at, pickupLocation, donatorNumber, donatorEmail } = useLoaderData();
+    const { _id, additionalNotes, foodStatus, donatorName, donatorImage, foodName, foodImage, foodQuantity, expireDate, created_at, pickupLocation, donatorNumber, donatorEmail, aboutFood } = useLoaderData();
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const foodModalRef = useRef(null);
@@ -65,7 +66,7 @@ const FoodDetails = () => {
                                 </div>
                                 <div className='p-6 rounded-md bg-white border border-dark-04'>
                                     <h4 className='mb-4 text-xl font-semibold text-heading'>Additional Notes</h4>
-                                    <p>{additionalNotes ? additionalNotes : 'Additional notes not Available '}</p>
+                                    <p>{additionalNotes ? additionalNotes : '---'}</p>
                                 </div>
                             </div>
                         </div>
@@ -74,6 +75,7 @@ const FoodDetails = () => {
                                 <FaArrowLeftLong /> Back to Foods
                             </Link>
                             <h1 className='text-2xl md:text-4xl text-heading font-bold mb-3 md:mb-4'>{foodName}</h1>
+                            <p className='mb-3'>{aboutFood}</p>
                             <p className='text-heading font-medium mb-6'>Food Status: <span className='text-green-500'>{foodStatus}</span></p>
                             <div className='p-6 rounded-md bg-white border border-dark-04 mb-6'>
                                 <h4 className='mb-4 text-xl font-semibold text-heading'>Food Details</h4>
@@ -99,13 +101,13 @@ const FoodDetails = () => {
                                     <li className='flex items-center gap-2.5'>
                                         <img src={create_date} className='w-6' alt='icons' />
                                         <div>
-                                            <span className='font-medium'>Create Date:</span> {created_at ? created_at[0] : 'data not found'}
+                                            <span className='font-medium'>Created At:</span> {moment(created_at).format('ll')}
                                         </div>
                                     </li>
                                     <li className='flex items-center gap-2.5'>
                                         <img src={exp_date} className='w-6' alt='icons' />
                                         <div>
-                                            <span className='font-medium'>Expire Date:</span> {expireDate}
+                                            <span className='font-medium'>Expired At:</span> {moment(expireDate).format('ll')}
                                         </div>
                                     </li>
                                 </ul>

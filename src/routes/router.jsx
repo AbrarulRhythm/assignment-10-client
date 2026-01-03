@@ -14,6 +14,8 @@ import News from "../pages/News/News";
 import Home from "../pages/Home/Home/Home";
 import Register from "../pages/Auth/Register/Register";
 import SignIn from "../pages/Auth/SignIn/SignIn";
+import DashboardLayout from "../layout/DashboardLayout";
+import DashboardOverview from "../pages/Dashboard/DashboardOverview/DashboardOverview";
 
 export const router = createBrowserRouter([
     {
@@ -76,6 +78,16 @@ export const router = createBrowserRouter([
             {
                 path: 'my-food-request',
                 element: <PrivateRoute><MyFoodRequests></MyFoodRequests></PrivateRoute>
+            }
+        ]
+    },
+    {
+        path: 'dashboard',
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        children: [
+            {
+                path: 'overview',
+                Component: DashboardOverview
             }
         ]
     }

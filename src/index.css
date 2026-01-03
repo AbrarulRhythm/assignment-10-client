@@ -23,6 +23,7 @@
   --color-body: #6C757D;
   --color-dark-04: #DFE0E4;
   --color-card: #F7F5EB;
+  --color-content-bg: #f9f9f9;
 
   /* Shadow */
   --shadow-btn-inner: inset 0px 0px 122px rgba(0, 0, 0, 0.22);
@@ -180,6 +181,14 @@ table {
 
 .header-nav ul a.active {
   @apply text-ps-primary relative before:content-[''] before:w-[90%] before:h-0.5 before:absolute before:-translate-x-[50%] before:left-[50%] before:mt-6 before:bg-linear-to-r before:from-ps-primary/0 before:via-ps-primary before:to-ps-primary/0;
+}
+
+.side-nav ul a {
+  @apply px-4 py-4 rounded-md hover:text-ps-primary duration-300;
+}
+
+.side-nav ul a.active {
+  @apply bg-content-bg text-ps-primary;
 }
 
 /* [ Hero Section ] */
