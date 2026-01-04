@@ -5,7 +5,6 @@ import AvailableFoods from "../pages/AvailableFoods/AvailableFoods";
 import { axiosInstance } from '../hooks/useAxios';
 import PrivateRoute from "../context/PrivateRoute";
 import FoodDetails from "../pages/FoodDetails/FoodDetails";
-import ManageMyFoods from "../pages/ManageMyFoods/ManageMyFoods";
 import UpdateFood from "../pages/UpdateFood/UpdateFood";
 import MyFoodRequests from "../pages/MyFoodRequests/MyFoodRequests";
 import AboutUs from "../pages/AboutUs/AboutUs";
@@ -16,6 +15,7 @@ import SignIn from "../pages/Auth/SignIn/SignIn";
 import DashboardLayout from "../layout/DashboardLayout";
 import DashboardOverview from "../pages/Dashboard/DashboardOverview/DashboardOverview";
 import AddFood from "../pages/Dashboard/AddFood/AddFood";
+import ManageMyFoods from "../pages/Dashboard/ManageMyFoods/ManageMyFoods";
 
 export const router = createBrowserRouter([
     {
@@ -60,10 +60,6 @@ export const router = createBrowserRouter([
                 Component: FoodDetails
             },
             {
-                path: 'manage-my-foods',
-                element: <PrivateRoute><ManageMyFoods></ManageMyFoods></PrivateRoute>
-            },
-            {
                 path: 'update-food/:id',
                 loader: async ({ params }) => {
                     const data = await axiosInstance.get(`/foods/${params.id}`);
@@ -88,6 +84,10 @@ export const router = createBrowserRouter([
             {
                 path: 'add-food',
                 Component: AddFood
+            },
+            {
+                path: 'manage-my-foods',
+                Component: ManageMyFoods
             },
         ]
     }

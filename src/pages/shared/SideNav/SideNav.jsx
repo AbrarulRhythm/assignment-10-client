@@ -4,7 +4,7 @@ import { RxDashboard } from "react-icons/rx";
 import { TbArrowBarToLeft } from 'react-icons/tb';
 import logo from '../../../assets/logo-dark.png';
 import logoIcon from '../../../assets/logoIcon.png';
-import { BsPlusSquare } from "react-icons/bs";
+import { BsBoxes, BsPlusSquare } from "react-icons/bs";
 
 const SideNav = ({ sideMenuOpen, setSideMenuOpen }) => {
 
@@ -36,6 +36,12 @@ const SideNav = ({ sideMenuOpen, setSideMenuOpen }) => {
                         <NavLink to='/dashboard/add-food' className={`${sideMenuOpen && 'lg:justify-center'} flex items-center`}>
                             <div><BsPlusSquare className='text-[19px]' /></div>
                             <span className={`${sideMenuOpen && 'lg:hidden'} text-sm pl-2`}>Add Food</span>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/dashboard/manage-my-foods' className={`${sideMenuOpen && 'lg:justify-center'} flex items-center`}>
+                            <div><BsBoxes className='text-[19px]' /></div>
+                            <span className={`${sideMenuOpen && 'lg:hidden'} text-sm pl-2`}>Manage My Foods</span>
                         </NavLink>
                     </li>
                 </ul>
