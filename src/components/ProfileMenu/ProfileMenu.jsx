@@ -57,11 +57,6 @@ const ProfileMenu = ({ menuRef, openMenu, setOpenMenu }) => {
                     </Link>
                 </li>
                 <li>
-                    <Link to='/manage-my-foods' className='flex items-center px-4 py-2 gap-2 hover:bg-gray-100'>
-                        <BsBoxes className='text-lg' /> Manage My Foods
-                    </Link>
-                </li>
-                <li>
                     <Link to='/my-food-request' className='flex items-center px-4 py-2 gap-2 hover:bg-gray-100'>
                         <IoFastFoodOutline className='text-lg' /> My Food Requests
                     </Link>
