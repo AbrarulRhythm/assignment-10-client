@@ -126,7 +126,7 @@ const ManageMyFoods = () => {
                                                 </td>
                                                 <td className='text-end whitespace-nowrap'>
                                                     <div className=' space-x-3'>
-                                                        <Link to={`/update-food/${food._id}`} className='text-sm text-yellow-500 border border-yellow-500 font-medium px-4 py-1 rounded-sm hover:bg-yellow-500 hover:text-white duration-300 cursor-pointer'>Update</Link>
+                                                        <Link to={`/dashboard/update-food/${food._id}`} className='text-sm text-yellow-500 border border-yellow-500 font-medium px-4 py-1 rounded-sm hover:bg-yellow-500 hover:text-white duration-300 cursor-pointer'>Update</Link>
                                                         <button
                                                             onClick={() => handleDeleteFood(food._id)}
                                                             className='text-sm text-red-500 border border-red-500 font-medium px-4 py-1 rounded-sm hover:bg-red-500 hover:text-white duration-300 cursor-pointer'>Delete</button>
