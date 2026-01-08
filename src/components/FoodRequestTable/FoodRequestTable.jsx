@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import moment from 'moment';
 
 const FoodRequestTable = ({ food, index, pageType }) => {
     const axiosSecure = useAxiosSecure();
@@ -78,17 +79,17 @@ const FoodRequestTable = ({ food, index, pageType }) => {
         <tr key={food._id} >
             <td>{index + 1}</td>
             <td className='max-w-[300px] whitespace-nowrap lg:whitespace-normal'>
-                <div className='flex flex-col lg:flex-row items-start lg:items-center gap-3'>
+                <div className='w-[300px] flex flex-col lg:flex-row items-start lg:items-center gap-3'>
                     <img src={foodData.foodImage} className='rounded-sm w-[116px] max-h-[95px] object-cover' alt='Food Image' />
                     <div>
                         <h5 className='text-base font-medium text-heading mb-0.5'>{foodData.foodName}</h5>
-                        <h6 className='text-[12px]'><span className='font-medium'>Create Date:</span> {foodData.created_at && foodData.created_at.length > 0 ? foodData.created_at[0] : 'data not found'}</h6>
-                        <h6 className='text-[12px]'><span className='font-medium'>Expire Date:</span> {foodData.expireDate}</h6>
+                        <h6 className='text-[12px]'><span className='font-medium'>Create Date:</span> {moment(foodData.created_at).format('ll')}</h6>
+                        <h6 className='text-[12px]'><span className='font-medium'>Expire Date:</span> {moment(foodData.expireDate).format('ll')}</h6>
                     </div>
                 </div>
             </td>
             <td>
-                <div className='flex flex-col lg:flex-row items-start lg:items-center gap-3'>
+                <div className='w-[200px] flex flex-col lg:flex-row items-start lg:items-center gap-3'>
                     <img
                         src={
                             pageType === 'foodDetails'

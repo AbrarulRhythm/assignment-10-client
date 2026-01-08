@@ -5,7 +5,6 @@ import AvailableFoods from "../pages/AvailableFoods/AvailableFoods";
 import { axiosInstance } from '../hooks/useAxios';
 import PrivateRoute from "../context/PrivateRoute";
 import FoodDetails from "../pages/FoodDetails/FoodDetails";
-import MyFoodRequests from "../pages/MyFoodRequests/MyFoodRequests";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import News from "../pages/News/News";
 import Home from "../pages/Home/Home/Home";
@@ -16,6 +15,7 @@ import DashboardOverview from "../pages/Dashboard/DashboardOverview/DashboardOve
 import AddFood from "../pages/Dashboard/AddFood/AddFood";
 import ManageMyFoods from "../pages/Dashboard/ManageMyFoods/ManageMyFoods";
 import UpdateFood from "../pages/Dashboard/UpdateFood/UpdateFood";
+import MyFoodRequest from "../pages/Dashboard/MyFoodRequest/MyFoodRequest";
 
 export const router = createBrowserRouter([
     {
@@ -58,10 +58,6 @@ export const router = createBrowserRouter([
                     return data.data;
                 },
                 Component: FoodDetails
-            },
-            {
-                path: 'my-food-request',
-                element: <PrivateRoute><MyFoodRequests></MyFoodRequests></PrivateRoute>
             }
         ]
     },
@@ -89,6 +85,10 @@ export const router = createBrowserRouter([
                 },
                 Component: UpdateFood
             },
+            {
+                path: 'my-food-request',
+                Component: MyFoodRequest
+            }
         ]
     }
 ]);

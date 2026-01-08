@@ -1,6 +1,4 @@
 import React, { useEffect } from 'react';
-import { BsBoxes } from 'react-icons/bs';
-import { IoFastFoodOutline } from 'react-icons/io5';
 import { PiSignOutBold } from 'react-icons/pi';
 import { RxDashboard } from 'react-icons/rx';
 import { Link } from 'react-router';
@@ -54,11 +52,6 @@ const ProfileMenu = ({ menuRef, openMenu, setOpenMenu }) => {
                 <li>
                     <Link to='/dashboard/overview' className='flex items-center px-4 py-2 gap-2 font-medium hover:bg-gray-100'>
                         <RxDashboard className='text-lg' /> Dashboard
-                    </Link>
-                </li>
-                <li>
-                    <Link to='/my-food-request' className='flex items-center px-4 py-2 gap-2 hover:bg-gray-100'>
-                        <IoFastFoodOutline className='text-lg' /> My Food Requests
                     </Link>
                 </li>
             </ul>

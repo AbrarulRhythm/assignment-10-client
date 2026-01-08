@@ -5,6 +5,7 @@ import { TbArrowBarToLeft } from 'react-icons/tb';
 import logo from '../../../assets/logo-dark.png';
 import logoIcon from '../../../assets/logoIcon.png';
 import { BsBoxes, BsPlusSquare } from "react-icons/bs";
+import { IoFastFoodOutline } from 'react-icons/io5';
 
 const SideNav = ({ sideMenuOpen, setSideMenuOpen }) => {
 
@@ -42,6 +43,12 @@ const SideNav = ({ sideMenuOpen, setSideMenuOpen }) => {
                         <NavLink to='/dashboard/manage-my-foods' className={`${sideMenuOpen && 'lg:justify-center'} flex items-center`}>
                             <div><BsBoxes className='text-[19px]' /></div>
                             <span className={`${sideMenuOpen && 'lg:hidden'} text-sm pl-2`}>Manage My Foods</span>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/dashboard/my-food-request' className={`${sideMenuOpen && 'lg:justify-center'} flex items-center`}>
+                            <div><IoFastFoodOutline className='text-[19px]' /></div>
+                            <span className={`${sideMenuOpen && 'lg:hidden'} text-sm pl-2`}>My Food Requests</span>
                         </NavLink>
                     </li>
                 </ul>
